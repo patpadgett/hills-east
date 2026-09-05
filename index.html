@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0b0c">
+  <meta name="description" content="Hills East Recording — John Matthews' recording studio in Lenexa, Kansas. Book a session and talk directly with John about your record.">
+  <title>Hills East Recording — Lenexa, Kansas</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/bigshoulders-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/michroma-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip" href="#book">Skip to booking</a>
+
+<header class="strip" id="top">
+  <a class="strip-brand" href="#top" aria-label="Hills East Recording, home">
+    <svg class="strip-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.5 20h19Z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M12 8.5 6.6 18h10.8Z" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M12 13.5 10 17h4Z" fill="currentColor"/></svg>
+    <span>Hills East Recording</span>
+  </a>
+
+  <nav class="strip-nav" aria-label="Sections">
+    <a href="#room">The room</a>
+    <a href="#channels">Sessions</a>
+    <a href="#selector">How it works</a>
+    <a href="#book">Book</a>
+  </nav>
+
+  <div class="strip-power" aria-live="polite">
+    <span class="lamp" data-lamp aria-hidden="true"></span>
+    <span class="lamp-label" data-lamp-label>Ready</span>
+  </div>
+
+  <button class="strip-menu" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open sections menu">
+    <span></span><span></span>
+  </button>
+  <nav class="drawer" id="drawer" aria-label="Sections" hidden>
+    <a href="#room">The room</a>
+    <a href="#channels">Sessions</a>
+    <a href="#selector">How it works</a>
+    <a href="#book">Book a session</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ============ CONTROL PANEL (hero) ============ -->
+  <section class="panel hero" aria-labelledby="hero-title">
+    <div class="screws" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+    <figure class="meter">
+      <div class="meter-bezel">
+        <video class="meter-video" autoplay muted loop playsinline preload="auto"
+               poster="assets/hills-east-poster.jpg"
+               aria-label="Hills East Recording ident: nested white triangles zoom endlessly behind the studio's lettering">
+          <source src="Hills_East_Recording.mp4" type="video/mp4">
+        </video>
+        <span class="meter-glass" aria-hidden="true"></span>
+      </div>
+      <figcaption class="meter-legend">
+        <span>Studio ident</span><span>Lenexa, Kansas</span>
+      </figcaption>
+      <button class="meter-play" type="button" aria-pressed="true" data-video-toggle>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="3.5" height="10" fill="currentColor"/><rect x="9.5" y="3" width="3.5" height="10" fill="currentColor"/></svg>
+        <span>Pause loop</span>
+      </button>
+    </figure>
+
+    <div class="legend">
+      <h1 id="hero-title">Plug in.<br>Sound like <em>you.</em></h1>
+      <p class="lede">Hills East is John Matthews’ recording studio in Lenexa, Kansas — one room, one engineer who answers his own messages. Bring the songs and tell John what they need.</p>
+
+      <div class="controls">
+        <a class="knob-btn" href="#book" data-arm>
+          <span class="knob" aria-hidden="true">
+            <svg viewBox="0 0 100 100">
+              <defs>
+                <radialGradient id="k1-cap" cx="38%" cy="30%" r="75%"><stop offset="0" stop-color="#3a3c42"/><stop offset=".55" stop-color="#15161a"/><stop offset="1" stop-color="#060607"/></radialGradient>
+                <linearGradient id="k1-rim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2f3f4"/><stop offset=".5" stop-color="#8c9096"/><stop offset="1" stop-color="#3f434a"/></linearGradient>
+              </defs>
+              <circle cx="50" cy="50" r="47" class="knob-rim" fill="url(#k1-rim)"/>
+              <circle cx="50" cy="50" r="42" class="knob-base"/>
+              <g class="knob-rot">
+                <path d="M50 4 L64 44 A19 19 0 1 1 36 44 Z" class="knob-head" fill="url(#k1-cap)"/>
+                <path d="M50 10 L50 30" class="knob-line"/>
+              </g>
+            </svg>
+          </span>
+          <span class="knob-text"><b>Book a session</b><small>Goes straight to John</small></span>
+        </a>
+        <a class="etched-link" href="#room">See the room <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M4 9l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CABINET: THE ROOM ============ -->
+  <section class="cab room" id="room" aria-labelledby="room-title">
+    <div class="cab-inner">
+      <h2 id="room-title" class="display">One room.<br>One set of ears.</h2>
+      <div class="room-copy">
+        <p>Hills East is a small studio, on purpose. You work directly with John from the first message to the last file — no front desk, no hand-offs, nobody in the room who doesn’t need to be there.</p>
+        <p>Whatever you play and wherever the record stands, tell John what it needs to become and he’ll tell you honestly what the room can do for it.</p>
+      </div>
+
+      <dl class="plate" aria-label="Studio details">
+        <span class="rivets" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <div><dt>Studio</dt><dd>Hills East Recording</dd></div>
+        <div><dt>Engineer</dt><dd>John Matthews</dd></div>
+        <div><dt>Location</dt><dd>Lenexa, Kansas</dd></div>
+        <div><dt>Contact</dt><dd>Direct with John</dd></div>
+        <div><dt>Booking</dt><dd><a class="etched-link" href="#book">Send an inquiry <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: CHANNELS (services) ============ -->
+  <section class="panel channels" id="channels" aria-labelledby="ch-title">
+    <div class="screws" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <h2 id="ch-title" class="silk silk-title">Tell John what you need</h2>
+
+    <div class="channel-row">
+      <article class="channel">
+        <div class="channel-head"><div class="jack" aria-hidden="true"><span></span><i></i></div><span class="ch-label">Input</span></div>
+        <h3>Tracking</h3>
+        <p>You have songs and need them recorded well. Say what you play, how many of you there are, and what the performance needs to feel like.</p>
+      </article>
+      <article class="channel">
+        <div class="channel-head"><div class="jack" aria-hidden="true"><span></span><i></i></div><span class="ch-label">Insert</span></div>
+        <h3>Mixing</h3>
+        <p>You have tracks and want them to become a record. Send the sessions or stems and a couple of references you want yours to sit next to.</p>
+      </article>
+      <article class="channel">
+        <div class="channel-head"><div class="jack" aria-hidden="true"><span></span><i></i></div><span class="ch-label">Output</span></div>
+        <h3>Finishing</h3>
+        <p>You have a mix and need it ready to release. Say where it’s going — streaming, vinyl, a video — and when.</p>
+      </article>
+    </div>
+
+    <p class="channel-note">Not sure which you need, or need all of it? <a href="#book">Describe the project</a> and John will tell you straight what the room can and can’t do for it.</p>
+  </section>
+
+  <!-- ============ CABINET: SELECTOR (process) ============ -->
+  <section class="cab selector" id="selector" aria-labelledby="sel-title">
+    <div class="cab-inner">
+      <h2 id="sel-title" class="display">How a session<br>comes together.</h2>
+
+      <div class="rotary" data-rotary>
+        <div class="rotary-dial" aria-hidden="true">
+          <svg viewBox="0 0 240 240">
+            <defs>
+              <radialGradient id="dial-cap" cx="38%" cy="30%" r="75%"><stop offset="0" stop-color="#3a3c42"/><stop offset=".55" stop-color="#15161a"/><stop offset="1" stop-color="#060607"/></radialGradient>
+              <linearGradient id="dial-rim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2f3f4"/><stop offset=".5" stop-color="#8c9096"/><stop offset="1" stop-color="#3f434a"/></linearGradient>
+            </defs>
+            <g class="dial-ticks">
+              <path d="M120 30 v16" transform="rotate(-60 120 120)"/>
+              <path d="M120 30 v16"/>
+              <path d="M120 30 v16" transform="rotate(60 120 120)"/>
+            </g>
+            <g class="dial-labels">
+              <text x="120" y="18" transform="rotate(-60 120 120)">Talk</text>
+              <text x="120" y="18">Track</text>
+              <text x="120" y="18" transform="rotate(60 120 120)">Finish</text>
+            </g>
+            <circle cx="120" cy="120" r="70" fill="url(#dial-rim)"/>
+            <circle cx="120" cy="120" r="63" class="knob-base"/>
+            <g class="dial-knob" data-dial>
+              <path d="M120 52 L140 112 A26 26 0 1 1 100 112 Z" class="knob-head" fill="url(#dial-cap)"/>
+              <path d="M120 60 v30" class="knob-line"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="rotary-side">
+        <div class="rotary-steps" role="tablist" aria-label="Session steps">
+          <button role="tab" id="tab-talk" aria-selected="true" aria-controls="step-talk" data-step="0">Talk</button>
+          <button role="tab" id="tab-track" aria-selected="false" aria-controls="step-track" data-step="1" tabindex="-1">Track</button>
+          <button role="tab" id="tab-finish" aria-selected="false" aria-controls="step-finish" data-step="2" tabindex="-1">Finish</button>
+        </div>
+
+        <div class="rotary-panels">
+          <div role="tabpanel" id="step-talk" aria-labelledby="tab-talk">
+            <h3>Talk it through</h3>
+            <p>Send John the songs, rough demos, or a voice memo, plus a couple of records you want yours to sit next to. He'll come back with a plan, a rough timeline, and straight answers.</p>
+          </div>
+          <div role="tabpanel" id="step-track" aria-labelledby="tab-track" hidden>
+            <h3>Get in the room</h3>
+            <p>Load in, get comfortable, dial the sounds at the source. The session runs at the pace of the performance — nobody watches the clock louder than the music.</p>
+          </div>
+          <div role="tabpanel" id="step-finish" aria-labelledby="tab-finish" hidden>
+            <h3>Finish and release</h3>
+            <p>Mixes go back and forth until they feel right. Then finals, formats, and a clear list of what you're walking away with — ready for release.</p>
+          </div>
+        </div>
+        <button class="etched-link rotary-auto" type="button" data-auto aria-pressed="true" hidden>Stop auto-step</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: BOOK (contact form) ============ -->
+  <section class="panel book" id="book" aria-labelledby="book-title">
+    <div class="screws" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+    <div class="book-head">
+      <h2 id="book-title" class="display book-display">Book<br>a session.</h2>
+      <p class="book-lede">This goes straight to John. Tell him what you’re making and where it stands; he’ll come back with a plan and straight answers.</p>
+      <ul class="book-list"><li>One room, one engineer</li><li>Replies come from John</li><li>Lenexa, Kansas</li></ul>
+    </div>
+
+    <form class="book-form" action="/inquiry" method="post" novalidate data-form>
+      <div class="field">
+        <label for="f-name">Your name</label>
+        <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Who is this?" required>
+        <span class="field-error" id="e-name" role="alert"></span>
+      </div>
+      <div class="field">
+        <label for="f-email">Email</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
+        <span class="field-error" id="e-email" role="alert"></span>
+      </div>
+      <div class="field">
+        <label for="f-project">Project or band</label>
+        <input id="f-project" name="project" type="text" autocomplete="organization" placeholder="Band, artist, or working title">
+      </div>
+      <div class="field">
+        <label for="f-need">What do you need?</label>
+        <select id="f-need" name="need">
+          <option value="record">Tracking</option>
+          <option value="mix">Mixing</option>
+          <option value="finish">Finishing</option>
+          <option value="all">The whole record</option>
+          <option value="unsure">Not sure yet</option>
+        </select>
+      </div>
+      <div class="field wide">
+        <label for="f-notes">Tell John about it</label>
+        <textarea id="f-notes" name="notes" rows="5" required placeholder="Songs, references, timeline, where the project stands…"></textarea>
+        <span class="field-error" id="e-notes" role="alert"></span>
+      </div>
+
+      <div class="book-actions wide">
+        <button class="knob-btn knob-submit" type="submit" data-arm>
+          <span class="knob" aria-hidden="true">
+            <svg viewBox="0 0 100 100">
+              <defs>
+                <radialGradient id="k2-cap" cx="38%" cy="30%" r="75%"><stop offset="0" stop-color="#3a3c42"/><stop offset=".55" stop-color="#15161a"/><stop offset="1" stop-color="#060607"/></radialGradient>
+                <linearGradient id="k2-rim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2f3f4"/><stop offset=".5" stop-color="#8c9096"/><stop offset="1" stop-color="#3f434a"/></linearGradient>
+              </defs>
+              <circle cx="50" cy="50" r="47" class="knob-rim" fill="url(#k2-rim)"/>
+              <circle cx="50" cy="50" r="42" class="knob-base"/>
+              <g class="knob-rot">
+                <path d="M50 4 L64 44 A19 19 0 1 1 36 44 Z" class="knob-head" fill="url(#k2-cap)"/>
+                <path d="M50 10 L50 30" class="knob-line"/>
+              </g>
+            </svg>
+          </span>
+          <span class="knob-text"><b>Send to John</b><small>He replies directly</small></span>
+        </button>
+        <p class="form-status" role="status" aria-live="polite" data-status></p>
+      </div>
+    </form>
+
+    <div class="book-done" hidden data-done>
+      <span class="lamp lamp-big lamp-on" aria-hidden="true"></span>
+      <h3>Recording.</h3>
+      <p>Your message is on its way to John. He’ll reply to you directly.</p>
+      <button type="button" class="etched-link" data-reset>Send another <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+    </div>
+  </section>
+
+</main>
+
+<footer class="backplate">
+  <div class="backplate-inner">
+    <p class="silk silk-stack"><span>Hills East Recording</span><span class="dot" aria-hidden="true"></span><span>Lenexa, Kansas</span></p>
+    <p class="backplate-note">Message John through this site and he’ll get back to you directly.<br><span class="backplate-legal">© <span data-year>2026</span> Hills East Recording. Lenexa, Kansas.</span></p>
+    <a class="etched-link" href="#top">Back to the top <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13V3M4 7l4-4 4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
+  </div>
+  <div class="backplate-vent" aria-hidden="true"></div>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>
