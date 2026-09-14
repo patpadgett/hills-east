@@ -1,0 +1,44 @@
+const {chromium}=require('/data/pat/node_modules/playwright');
+const fs=require('fs');
+const dir='/data/pat/hills-east-rackmount/.impeccable/review';fs.mkdirSync(dir,{recursive:true});
+const round=process.argv[2]||'1';
+(async()=>{const browser=await chromium.launch({headless:true});const results=[];
+for(const width of [1440,390]){
+ const context=await browser.newContext({viewport:{width,height:width===390?844:1000}});const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});page.on('response',r=>{if(r.status()>=400)errors.push(r.status()+' '+r.url());});
+ const url='http://127.0.0.1:8768/hills-east-rackmount';
+ await page.goto(url+'-before-revision/');await page.evaluate(()=>document.fonts.ready);
+ const old=await page.locator('.crt-img').boundingBox();
+ await page.goto(url+'/');await page.evaluate(()=>document.fonts.ready);await page.waitForTimeout(250);
+ const logo=await page.locator('.crt-img').boundingBox();const rack=await page.locator('.rack').boundingBox();
+ const r={width,logo:{width:logo.width,oldWidth:old.width,enlargement:logo.width/old.width,centerError:Math.abs(logo.x+logo.width/2-rack.x-rack.width/2),fit:await page.locator('.crt-img').evaluate(e=>getComputedStyle(e).objectFit)}};
+ await page.screenshot({path:`${dir}/revision-${round}-${width}-hero.png`});
+ await page.locator('#ident-toggle').click();r.identPaused=(await page.locator('.crt-img').getAttribute('src')).includes('poster');
+ await page.locator('#motion-toggle').click();
+ await page.locator('#dynamics').scrollIntoViewIfNeeded();await page.screenshot({path:`${dir}/revision-${round}-${width}-dynamics.png`});
+ r.knobs={};for(const key of ['gain','peak','input','attack','release','output']){const k=page.locator(`[data-knob="${key}"]`);await k.focus();await k.press('Home');const before=await page.locator('#dynamics').getAttribute('data-demo-level');const responseBefore=await page.locator('#dynamics').getAttribute('data-'+key+'-response');await k.press('End');r.knobs[key]={responseBefore,responseAfter:await page.locator('#dynamics').getAttribute('data-'+key+'-response'),value:await k.getAttribute('aria-valuenow'),before,after:await page.locator('#dynamics').getAttribute('data-demo-level'),readout:await page.locator(`[data-value="${key}"]`).textContent()};await k.press('ArrowLeft');}
+ await page.locator('[data-ratio="20"]').click();r.ratio=await page.locator('[data-ratio="20"]').getAttribute('aria-pressed');
+ await page.locator('[data-adjust="input"][data-direction="-1"]').click();r.nudge=await page.locator('[data-knob="input"]').getAttribute('aria-valuenow');
+ await page.locator('#msg').fill('Keep this exact message.');
+ await page.locator('#route-input').selectOption('in-mixing');await page.locator('#route-output').selectOption('out-release');await page.locator('#use-route').click();
+ r.booking={need:await page.locator('#need').inputValue(),summary:await page.locator('#booking-route').textContent(),hidden:await page.locator('#booking-route-field').inputValue(),message:await page.locator('#msg').inputValue(),focused:await page.evaluate(()=>document.activeElement.id)};
+ await page.screenshot({path:`${dir}/revision-${round}-${width}-booking.png`});
+ await page.locator('#clear-route').click();r.clearPreserved=await page.locator('#msg').inputValue();
+ await page.locator('[data-jack="in-finishing"]').focus();await page.keyboard.press('Enter');await page.locator('[data-jack="room"]').focus();await page.keyboard.press('Space');await page.locator('[data-jack="room"]').click();await page.locator('[data-jack="out-video"]').click();
+ r.jacks={need:await page.locator('#need').inputValue(),route:await page.locator('#booking-route-field').inputValue(),cables:await page.locator('.cables path').count()};
+ await page.locator('#patch').scrollIntoViewIfNeeded();await page.screenshot({path:`${dir}/revision-${round}-${width}-patch.png`});
+ await page.locator('#optical').scrollIntoViewIfNeeded();await page.screenshot({path:`${dir}/revision-${round}-${width}-optical.png`});
+ r.paused={running:await page.locator('html').getAttribute('data-demo-running'),triggers:await page.evaluate(()=>ScrollTrigger.getAll().length)};
+ await page.locator('#motion-toggle').click();await page.locator('#dynamics').scrollIntoViewIfNeeded();await page.waitForTimeout(150);r.motion={running:await page.locator('html').getAttribute('data-demo-running'),triggers:await page.evaluate(()=>ScrollTrigger.getAll().length)};
+ await page.locator('#room').scrollIntoViewIfNeeded();await page.waitForTimeout(800);r.offscreen=await page.locator('html').getAttribute('data-demo-running');
+ await page.locator('#reset').click({clickCount:3,delay:60});await page.waitForTimeout(100);
+ r.egg={visible:await page.locator('#hidden-rack').isVisible(),steps:await page.locator('.hr-step').count(),keys:await page.locator('.hr-key').count(),initialLevels:await page.evaluate(()=>HiddenRack.getLevels())};
+ await page.getByRole('button',{name:'PLAY',exact:true}).click();await page.waitForTimeout(600);r.egg.playing=await page.getByRole('button',{name:'STOP',exact:true}).getAttribute('aria-pressed');r.egg.levels=await page.evaluate(()=>HiddenRack.getLevels());
+ await page.locator('.hr-power').click();await page.waitForTimeout(100);r.egg.closed=!(await page.locator('#hidden-rack').isVisible());r.egg.closedLevels=await page.evaluate(()=>HiddenRack.getLevels());
+ await page.emulateMedia({reducedMotion:'reduce'});await page.locator('#dynamics').scrollIntoViewIfNeeded();await page.waitForTimeout(200);
+ r.reduced={triggers:await page.evaluate(()=>ScrollTrigger.getAll().length),running:await page.locator('html').getAttribute('data-demo-running'),ident:await page.locator('.crt-img').getAttribute('src'),scroll:await page.locator('html').evaluate(e=>getComputedStyle(e).scrollBehavior)};
+ await page.locator('[data-knob="input"]').press('Home');r.reduced.level=await page.locator('#dynamics').getAttribute('data-demo-level');
+ await page.screenshot({path:`${dir}/revision-${round}-${width}-full.png`,fullPage:true});
+ await page.locator('#name').fill('QA Test');await page.locator('#email').fill('qa@example.com');await page.locator('.book-form button[type=submit]').click();r.formHonesty=await page.locator('#form-note').textContent();
+ r.overflow=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,client:document.documentElement.clientWidth,offenders:[...document.querySelectorAll('body *')].filter(e=>e.getBoundingClientRect().right>innerWidth+1).map(e=>e.className).slice(0,10)}));r.errors=errors;r.assertions={centered:r.logo.centerError<1,enlarged:r.logo.enlargement>(width===1440?1.6:1.2),uncropped:r.logo.fit==='contain',route:r.booking.hidden==='Mixing → John → Release'&&r.booking.need==='Mixing'&&r.booking.focused==='name',preserved:r.booking.message===r.clearPreserved&&r.clearPreserved==='Keep this exact message.',jacks:r.jacks.cables===2&&r.jacks.need==='Finishing',attack:Number(r.knobs.attack.responseBefore)>Number(r.knobs.attack.responseAfter),release:Number(r.knobs.release.responseBefore)>Number(r.knobs.release.responseAfter),offscreen:r.offscreen==='false',reduced:r.reduced.running==='false'&&r.reduced.triggers===0,egg:r.egg.visible&&r.egg.steps===64&&r.egg.keys===25&&r.egg.levels[0]>0&&r.egg.closed&&r.egg.closedLevels[0]===0,overflow:r.overflow.scroll===width,errors:r.errors.length===0,form:r.formHonesty.startsWith('Not sent')};results.push(r);await context.close();
+}
+const nojs=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});const p=await nojs.newPage();await p.goto('http://127.0.0.1:8768/hills-east-rackmount/');results.push({noJS:{hero:await p.locator('h1').isVisible(),services:await p.locator('.service:visible').count(),stages:await p.locator('.stage:visible').count(),booking:await p.locator('#book').isVisible()}});await nojs.close();await browser.close();fs.writeFileSync(`${dir}/revision-${round}-results.json`,JSON.stringify(results,null,2));console.log(JSON.stringify(results,null,2));if(results.some(r=>r.assertions&&Object.values(r.assertions).includes(false)))process.exitCode=1;})().catch(e=>{console.error(e);process.exit(1)});

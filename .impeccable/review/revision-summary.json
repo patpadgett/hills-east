@@ -1,0 +1,18 @@
+{
+  "rounds": 2,
+  "assertionsPassed": 28,
+  "assertionsFailed": 0,
+  "nodeChecks": [
+    "script.js",
+    "hidden-rack.js",
+    "revision-qa.cjs"
+  ],
+  "detector": "not run; known missing modules",
+  "visualReview": "Round 1 hero/desktop optical/mobile dynamics; round 2 mobile optical and patch confirmed no clipping/overlap.",
+  "caveats": [
+    "No booking endpoint",
+    "No perceived audio listening check",
+    "No real touch device or cross-browser check",
+    "Public meter demo deliberately isolated from hidden audio"
+  ]
+}

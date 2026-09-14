@@ -1,0 +1,278 @@
+[
+  {
+    "width": 1440,
+    "logo": {
+      "width": 648,
+      "oldWidth": 350.84375,
+      "enlargement": 1.8469760399038033,
+      "centerError": 0,
+      "fit": "contain"
+    },
+    "identPaused": true,
+    "knobs": {
+      "gain": {
+        "responseBefore": null,
+        "responseAfter": null,
+        "value": "100",
+        "before": "0.0000",
+        "after": "0.3612",
+        "readout": "100%"
+      },
+      "peak": {
+        "responseBefore": null,
+        "responseAfter": null,
+        "value": "100",
+        "before": "0.4476",
+        "after": "0.1492",
+        "readout": "100%"
+      },
+      "input": {
+        "responseBefore": null,
+        "responseAfter": null,
+        "value": "100",
+        "before": "0.0000",
+        "after": "0.2079",
+        "readout": "100%"
+      },
+      "attack": {
+        "responseBefore": "1.0000",
+        "responseAfter": "0.2164",
+        "value": "100",
+        "before": "0.2021",
+        "after": "0.2021",
+        "readout": "410 ms"
+      },
+      "release": {
+        "responseBefore": "0.7135",
+        "responseAfter": "0.0752",
+        "value": "100",
+        "before": "0.2021",
+        "after": "0.2021",
+        "readout": "1280 ms"
+      },
+      "output": {
+        "responseBefore": null,
+        "responseAfter": null,
+        "value": "100",
+        "before": "0.0000",
+        "after": "0.3110",
+        "readout": "100%"
+      }
+    },
+    "ratio": "true",
+    "nudge": "90",
+    "booking": {
+      "need": "Mixing",
+      "summary": "Mixing → John → Release",
+      "hidden": "Mixing → John → Release",
+      "message": "Keep this exact message.",
+      "focused": "name"
+    },
+    "clearPreserved": "Keep this exact message.",
+    "jacks": {
+      "need": "Finishing",
+      "route": "Finishing → John → Vinyl / video",
+      "cables": 2
+    },
+    "paused": {
+      "running": "false",
+      "triggers": 0
+    },
+    "motion": {
+      "running": "true",
+      "triggers": 3
+    },
+    "offscreen": "false",
+    "egg": {
+      "visible": true,
+      "steps": 64,
+      "keys": 25,
+      "initialLevels": [
+        0,
+        0
+      ],
+      "playing": "true",
+      "levels": [
+        0.5201732823475178,
+        0.5201732823475178
+      ],
+      "closed": true,
+      "closedLevels": [
+        0,
+        0
+      ]
+    },
+    "reduced": {
+      "triggers": 0,
+      "running": "false",
+      "ident": "assets/hills-east-poster.jpg",
+      "scroll": "auto",
+      "level": "0.0000"
+    },
+    "formHonesty": "Not sent — this form isn’t connected yet. Your text and route are still here; John’s direct contact details will replace this note once he supplies them.",
+    "overflow": {
+      "scroll": 1440,
+      "client": 1440,
+      "offenders": []
+    },
+    "errors": [],
+    "assertions": {
+      "centered": true,
+      "enlarged": true,
+      "uncropped": true,
+      "route": true,
+      "preserved": true,
+      "jacks": true,
+      "attack": true,
+      "release": true,
+      "offscreen": true,
+      "reduced": true,
+      "egg": true,
+      "overflow": true,
+      "errors": true,
+      "form": true
+    }
+  },
+  {
+    "width": 390,
+    "logo": {
+      "width": 298,
+      "oldWidth": 228,
+      "enlargement": 1.3070175438596492,
+      "centerError": 0,
+      "fit": "contain"
+    },
+    "identPaused": true,
+    "knobs": {
+      "gain": {
+        "responseBefore": null,
+        "responseAfter": null,
+        "value": "100",
+        "before": "0.0000",
+        "after": "0.3612",
+        "readout": "100%"
+      },
+      "peak": {
+        "responseBefore": null,
+        "responseAfter": null,
+        "value": "100",
+        "before": "0.4476",
+        "after": "0.1492",
+        "readout": "100%"
+      },
+      "input": {
+        "responseBefore": null,
+        "responseAfter": null,
+        "value": "100",
+        "before": "0.0000",
+        "after": "0.2079",
+        "readout": "100%"
+      },
+      "attack": {
+        "responseBefore": "1.0000",
+        "responseAfter": "0.2164",
+        "value": "100",
+        "before": "0.2021",
+        "after": "0.2021",
+        "readout": "410 ms"
+      },
+      "release": {
+        "responseBefore": "0.7135",
+        "responseAfter": "0.0752",
+        "value": "100",
+        "before": "0.2021",
+        "after": "0.2021",
+        "readout": "1280 ms"
+      },
+      "output": {
+        "responseBefore": null,
+        "responseAfter": null,
+        "value": "100",
+        "before": "0.0000",
+        "after": "0.3110",
+        "readout": "100%"
+      }
+    },
+    "ratio": "true",
+    "nudge": "90",
+    "booking": {
+      "need": "Mixing",
+      "summary": "Mixing → John → Release",
+      "hidden": "Mixing → John → Release",
+      "message": "Keep this exact message.",
+      "focused": "name"
+    },
+    "clearPreserved": "Keep this exact message.",
+    "jacks": {
+      "need": "Finishing",
+      "route": "Finishing → John → Vinyl / video",
+      "cables": 2
+    },
+    "paused": {
+      "running": "false",
+      "triggers": 0
+    },
+    "motion": {
+      "running": "true",
+      "triggers": 3
+    },
+    "offscreen": "false",
+    "egg": {
+      "visible": true,
+      "steps": 64,
+      "keys": 25,
+      "initialLevels": [
+        0,
+        0
+      ],
+      "playing": "true",
+      "levels": [
+        0.5701444368432679,
+        0.5701444368432679
+      ],
+      "closed": true,
+      "closedLevels": [
+        0,
+        0
+      ]
+    },
+    "reduced": {
+      "triggers": 0,
+      "running": "false",
+      "ident": "assets/hills-east-poster.jpg",
+      "scroll": "auto",
+      "level": "0.0000"
+    },
+    "formHonesty": "Not sent — this form isn’t connected yet. Your text and route are still here; John’s direct contact details will replace this note once he supplies them.",
+    "overflow": {
+      "scroll": 390,
+      "client": 390,
+      "offenders": []
+    },
+    "errors": [],
+    "assertions": {
+      "centered": true,
+      "enlarged": true,
+      "uncropped": true,
+      "route": true,
+      "preserved": true,
+      "jacks": true,
+      "attack": true,
+      "release": true,
+      "offscreen": true,
+      "reduced": true,
+      "egg": true,
+      "overflow": true,
+      "errors": true,
+      "form": true
+    }
+  },
+  {
+    "noJS": {
+      "hero": true,
+      "services": 3,
+      "stages": 3,
+      "booking": true
+    }
+  }
+]
