@@ -10,7 +10,10 @@
 <link rel="preload" href="fonts/bigshoulders-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/michroma-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
+<<<<<<< HEAD
 <link rel="stylesheet" href="sampler.css">
+=======
+>>>>>>> 75e08d913f4d20a04910de330c6db61f4f569cb5
 </head>
 <body>
 <a class="skip" href="#book">Skip to booking</a>
@@ -48,19 +51,45 @@
         <span class="crt-glass" aria-hidden="true"></span>
       </div>
       <figcaption class="legend crt-cap">Monitor · studio ident <button class="pushbtn pushbtn--sm" type="button" id="ident-toggle" aria-pressed="true">Pause</button></figcaption>
+<<<<<<< HEAD
       <button class="pushbtn motion-toggle" type="button" id="motion-toggle" aria-pressed="false">Pause all motion</button>
+=======
+>>>>>>> 75e08d913f4d20a04910de330c6db61f4f569cb5
     </figure>
 
     <div class="hero-face">
       <h1 id="hero-title">Plug in.<br>Sound like <em>you.</em></h1>
       <p class="lede">Hills East is John Matthews’ recording studio in Lenexa, Kansas — one room, one engineer who answers his own messages. Bring the songs and tell John what they need.</p>
 
+<<<<<<< HEAD
+=======
+      <div class="hero-cluster">
+      <div class="meters" aria-hidden="true">
+        <div class="vu" data-vu="L"><svg viewBox="0 0 200 110"><path class="vu-arc" d="M20 95 A85 85 0 0 1 180 95"/><path class="vu-red" d="M150 45 A85 85 0 0 1 180 95"/><g class="vu-ticks"></g><text x="100" y="80" class="vu-label">VU</text><line class="vu-needle" x1="100" y1="100" x2="100" y2="20"/><circle cx="100" cy="100" r="6" class="vu-hub"/></svg><span class="legend">L</span></div>
+        <div class="vu" data-vu="R"><svg viewBox="0 0 200 110"><path class="vu-arc" d="M20 95 A85 85 0 0 1 180 95"/><path class="vu-red" d="M150 45 A85 85 0 0 1 180 95"/><g class="vu-ticks"></g><text x="100" y="80" class="vu-label">VU</text><line class="vu-needle" x1="100" y1="100" x2="100" y2="20"/><circle cx="100" cy="100" r="6" class="vu-hub"/></svg><span class="legend">R</span></div>
+      </div>
+        <div class="knob-wrap">
+          <div class="knob knob--skirt" role="slider" tabindex="0" aria-label="Input gain" aria-valuemin="0" aria-valuemax="100" aria-valuenow="62" data-knob="gain"><span class="knob-cap"><i class="knob-line"></i></span></div>
+          <span class="legend">Input</span>
+        </div>
+        <div class="knob-wrap">
+          <div class="knob knob--chicken" role="slider" tabindex="0" aria-label="Lamp brightness" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70" data-knob="lamps"><span class="knob-cap"><i class="knob-line"></i></span></div>
+          <span class="legend">Lamps</span>
+        </div>
+        <div class="knob-wrap">
+          <div class="knob knob--soft" role="slider" tabindex="0" aria-label="Monitor speed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" data-knob="speed"><span class="knob-cap"><i class="knob-line"></i></span></div>
+          <span class="legend">Speed</span>
+        </div>
+      </div>
+
+>>>>>>> 75e08d913f4d20a04910de330c6db61f4f569cb5
       <div class="hero-controls">
         <a class="bigswitch" href="#book"><span class="bigswitch-lamp" aria-hidden="true"></span>Book a session<small>Goes straight to John</small></a>
       </div>
     </div>
   </section>
 
+<<<<<<< HEAD
   <section class="unit u3 optical-unit" id="optical" aria-labelledby="optical-title">
     <span class="screw tl"></span><span class="screw tr"></span><span class="screw bl"></span><span class="screw br"></span>
     <div class="optical-brand"><span>Hills East</span><h2 id="optical-title">Studio leveling amplifier</h2></div>
@@ -88,16 +117,23 @@
     <p class="demo-note">Distressor-inspired meter demo. No emulation, equipment claim or endorsement.</p>
   </section>
 
+=======
+>>>>>>> 75e08d913f4d20a04910de330c6db61f4f569cb5
   <!-- 2U · patchbay: sessions -->
   <section class="unit u2 patchbay" id="patch" aria-labelledby="patch-title">
     <span class="screw tl"></span><span class="screw tr"></span><span class="screw bl"></span><span class="screw br"></span>
     <div class="patch-head">
       <h2 id="patch-title">Patch your session.</h2>
+<<<<<<< HEAD
       <p class="patch-hint">Choose an input and an output below, or patch the jacks: tap/click an input, then John; tap/click John, then an output. Keyboard: Tab and Enter/Space. Dragging works too. Use this route carries your choices to booking.</p>
     </div>
     <div class="route-selectors"><div class="f"><label for="route-input">Session input</label><select id="route-input"><option value="">Choose a service</option><option value="in-tracking">Tracking</option><option value="in-mixing">Mixing</option><option value="in-finishing">Finishing</option></select></div><div class="f"><label for="route-output">Session output</label><select id="route-output"><option value="">Choose an outcome</option><option value="out-record">A record</option><option value="out-release">Release</option><option value="out-video">Vinyl / video</option></select></div></div>
     <div class="route-actions"><p id="route-status" role="status">Choose a service and an outcome.</p><button class="pushbtn" type="button" id="use-route">Use this route</button><button class="pushbtn" type="button" id="clear-route">Clear route</button></div>
     <noscript><p>Interactive routing needs JavaScript. You can still choose your service and describe the outcome in the booking form below. The form is not connected.</p></noscript>
+=======
+      <p class="patch-hint">Drag a cable from an <b>input</b> to the <b>room</b>, then from the room to an <b>output</b>. Keyboard: focus a jack, press Enter, focus another, Enter.</p>
+    </div>
+>>>>>>> 75e08d913f4d20a04910de330c6db61f4f569cb5
     <div class="jackfield">
       <svg class="cables" aria-hidden="true"></svg>
       <div class="jackrow jackrow--in">
@@ -140,7 +176,11 @@
       <div><dt>Location</dt><dd>Lenexa, Kansas</dd></div>
       <div><dt>Contact</dt><dd>Direct with John</dd></div>
     </dl>
+<<<<<<< HEAD
     <div class="ladder" aria-hidden="true"><span class="legend">Demo level</span><div class="ladder-leds"></div></div>
+=======
+    <div class="ladder" aria-hidden="true"><span class="legend">Room tone</span><div class="ladder-leds"></div></div>
+>>>>>>> 75e08d913f4d20a04910de330c6db61f4f569cb5
   </section>
 
   <!-- 2U · how it works: rotary selector -->
@@ -176,7 +216,10 @@
       <div class="f"><label for="project">Project or band</label><input id="project" name="project"></div>
       <div class="f"><label for="need">What do you need?</label>
         <select id="need" name="need"><option>Tracking</option><option>Mixing</option><option>Finishing</option><option>The whole record</option><option>Not sure yet</option></select></div>
+<<<<<<< HEAD
       <div class="f f--wide booking-route"><span class="legend">Your session route</span><p id="booking-route" aria-live="polite">No patch route selected.</p><input type="hidden" id="booking-route-field" name="session_route" value=""></div>
+=======
+>>>>>>> 75e08d913f4d20a04910de330c6db61f4f569cb5
       <div class="f f--wide"><label for="msg">Tell John about it</label><textarea id="msg" name="message" rows="5" required></textarea></div>
       <div class="f f--wide send-row">
         <button class="bigswitch bigswitch--btn" type="submit"><span class="bigswitch-lamp" aria-hidden="true"></span>Send to John<small>He replies directly</small></button>
@@ -189,11 +232,18 @@
   <footer class="unit u1 power" aria-label="Site footer">
     <span class="screw tl"></span><span class="screw tr"></span>
     <div class="power-left">
+<<<<<<< HEAD
       <span class="legend">Power conditioner · demo LEDs</span>
       <span class="ladder-leds ladder-leds--power" aria-hidden="true"></span>
     </div>
     <p class="power-copy">© <span data-year>2026</span> Hills East Recording. Lenexa, Kansas.</p>
     <div class="utility-controls"><label for="lamp-level">Panel lamps</label><input id="lamp-level" type="range" min="0" max="100" value="70"><label for="scan-speed">Scan speed</label><input id="scan-speed" type="range" min="0" max="100" value="50"></div>
+=======
+      <span class="legend">Power conditioner</span>
+      <span class="ladder-leds ladder-leds--power" aria-hidden="true"></span>
+    </div>
+    <p class="power-copy">© <span data-year>2026</span> Hills East Recording. Lenexa, Kansas.</p>
+>>>>>>> 75e08d913f4d20a04910de330c6db61f4f569cb5
     <div class="power-right">
       <button class="reset" id="reset" type="button" aria-label="Reset"><span class="legend">Reset</span></button>
       <a class="pushbtn" href="#rack">Top</a>
@@ -207,7 +257,10 @@
 <script src="vendor/gsap.min.js" defer></script>
 <script src="vendor/ScrollTrigger.min.js" defer></script>
 <script src="script.js" defer></script>
+<<<<<<< HEAD
 <script src="pad-sampler.js" defer></script>
+=======
+>>>>>>> 75e08d913f4d20a04910de330c6db61f4f569cb5
 <script src="hidden-rack.js" defer></script>
 </body>
 </html>

@@ -21,7 +21,10 @@
     window.dispatchEvent(new CustomEvent('hiddenrack:audio', { detail: { levels: null } }));
     rack = null;
     s.dead = true;
+<<<<<<< HEAD
     if (s.sampler) s.sampler.destroy();
+=======
+>>>>>>> 75e08d913f4d20a04910de330c6db61f4f569cb5
     clearInterval(s.timer);
     cancelAnimationFrame(s.frame);
     s.cleanup.forEach(fn => fn());
@@ -228,12 +231,19 @@
       while (s.next < now + 0.1) {
         const step = s.step, t = s.next;
         s.pattern.forEach((row, i) => { if (row[step]) drum(i, t); });
+<<<<<<< HEAD
         if (s.sampler) s.sampler.tick(step, t);
+=======
+>>>>>>> 75e08d913f4d20a04910de330c6db61f4f569cb5
         if (s.seq && s.pattern[0][step] && !s.held.size) {
           const scale = [48,51,53,55,58,60,63,65,67,70];
           noteOn(scale[s.arp++ % scale.length], t, 60 / s.bpm * 0.32);
         }
+<<<<<<< HEAD
         if (canAnimate()) s.queue.push({step, time:t}); else s.queue.length = 0;
+=======
+        s.queue.push({step, time:t});
+>>>>>>> 75e08d913f4d20a04910de330c6db61f4f569cb5
         const base = 60 / s.bpm / 4, swing = s.swing / 100 * 0.5;
         s.next += base * (step % 2 === 0 ? 1 + swing : 1 - swing);
         s.step = (step + 1) % 16;
@@ -241,7 +251,10 @@
     }
     function stop() {
       s.playing = false; clearInterval(s.timer); s.timer = null; s.queue.length = 0;
+<<<<<<< HEAD
       if (s.sampler) s.sampler.sync(false, s.bpm);
+=======
+>>>>>>> 75e08d913f4d20a04910de330c6db61f4f569cb5
       play.textContent = 'PLAY'; play.setAttribute('aria-pressed', 'false'); led.classList.remove('on');
       stepButtons.flat().forEach(b => b.classList.remove('cur'));
       if (s.ctx) {
@@ -249,6 +262,7 @@
         if (!s.held.size) releaseNote();
       }
     }
+<<<<<<< HEAD
     let onScreen = false;
     const motionQuery = matchMedia('(prefers-reduced-motion: reduce)');
     function canAnimate() { return !s.dead && s.playing && onScreen && !document.hidden && !motionQuery.matches && !document.documentElement.classList.contains('motion-paused'); }
@@ -259,6 +273,14 @@
         let current = null;
         while (s.queue.length && s.queue[0].time <= s.ctx.currentTime) current = s.queue.shift().step;
         if (current !== null) { stepButtons.forEach(row => row.forEach((b, i) => b.classList.toggle('cur', i === current))); if (s.sampler) s.sampler.position(current); }
+=======
+    function animate() {
+      if (s.dead) return;
+      if (s.ctx && s.playing) {
+        let current = null;
+        while (s.queue.length && s.queue[0].time <= s.ctx.currentTime) current = s.queue.shift().step;
+        if (current !== null) stepButtons.forEach(row => row.forEach((b, i) => b.classList.toggle('cur', i === current)));
+>>>>>>> 75e08d913f4d20a04910de330c6db61f4f569cb5
       }
       s.frame = requestAnimationFrame(animate);
     }
@@ -279,13 +301,21 @@
       if (!ensureAudio()) return;
       s.playing = true; s.step = 0; s.arp = 0; s.next = s.ctx.currentTime + 0.04;
       play.textContent = 'STOP'; play.setAttribute('aria-pressed', 'true'); led.classList.add('on');
+<<<<<<< HEAD
       if (s.sampler) s.sampler.sync(true, s.bpm);
       scheduler(); s.timer = setInterval(scheduler, 25); syncAnimation();
+=======
+      scheduler(); s.timer = setInterval(scheduler, 25);
+>>>>>>> 75e08d913f4d20a04910de330c6db61f4f569cb5
     }, false);
     const display = el('div', 'hr-seg', undefined, transport);
     display.setAttribute('aria-label', 'Tempo in beats per minute');
     const digits = el('span', 'hr-seg-digits', '120', display);
+<<<<<<< HEAD
     knob(transport, 'BPM', 60, 200, s.bpm, v => { s.bpm = v; digits.textContent = String(v).padStart(3, '0'); if (s.sampler) s.sampler.sync(s.playing, v); }, {integer:true});
+=======
+    knob(transport, 'BPM', 60, 200, s.bpm, v => { s.bpm = v; digits.textContent = String(v).padStart(3, '0'); }, {integer:true});
+>>>>>>> 75e08d913f4d20a04910de330c6db61f4f569cb5
     knob(transport, 'SWING', 0, 100, s.swing, v => { s.swing = v; }, {integer:true, format:v => v + '%'});
     knob(transport, 'MASTER', 0, 1, s.volume, v => { s.volume = v; if (s.ctx) s.master.gain.setTargetAtTime(v, s.ctx.currentTime, 0.015); }, {format:v => Math.round(v * 100) + '%'});
     const seq = button('SEQ', 'hr-switch', transport, () => {
@@ -378,6 +408,7 @@
     ['pointerup','pointercancel','lostpointercapture'].forEach(type => listen(keyboard, type, e => { s.pointers.delete(e.pointerId); lift('pointer:' + e.pointerId); }));
     const hint = el('p', 'hr-hint', 'Click PLAY or play the keys. Sound is on.', bf);
     el('p', 'hr-key-hint', 'C3–C4: Z S X D C V G B H N J M ,  ·  C4–C5: Q 2 W 3 E R 5 T 6 Y 7 U I', bf);
+<<<<<<< HEAD
     const samplerHost = el('section', 'hr-unit', undefined, shell);
     s.sampler = window.HillsPadSampler(samplerHost, {
       audio: () => ensureAudio() ? { ctx: s.ctx, master: s.master } : null,
@@ -386,6 +417,11 @@
     function editable(target) { return target && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName)); }
     listen(window, 'keydown', e => {
       if (e.repeat || e.ctrlKey || e.metaKey || e.altKey || editable(e.target) || e.target.closest('.hr-sampler')) return;
+=======
+    function editable(target) { return target && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName)); }
+    listen(window, 'keydown', e => {
+      if (e.repeat || e.ctrlKey || e.metaKey || e.altKey || editable(e.target)) return;
+>>>>>>> 75e08d913f4d20a04910de330c6db61f4f569cb5
       const k = e.key.toLowerCase();
       if (Object.prototype.hasOwnProperty.call(keyMap, k)) { e.preventDefault(); press('computer:' + k, keyMap[k]); }
     });
@@ -393,11 +429,15 @@
     function releaseAll() { s.held.clear(); s.pointers.clear(); releaseNote(); updateKeys(); }
     listen(window, 'blur', releaseAll);
     listen(document, 'visibilitychange', () => { if (document.hidden) { releaseAll(); if (s.playing) stop(); } });
+<<<<<<< HEAD
     const observer = new IntersectionObserver(entries => { onScreen = entries[0].isIntersecting; syncAnimation(); });
     observer.observe(container); s.cleanup.push(() => observer.disconnect());
     listen(document, 'visibilitychange', syncAnimation);
     listen(window, 'rack:motion', syncAnimation);
     listen(motionQuery, 'change', syncAnimation);
+=======
+    animate();
+>>>>>>> 75e08d913f4d20a04910de330c6db61f4f569cb5
     return window.HiddenRack;
   }
   window.HiddenRack = { mount, unmount, getLevels };
