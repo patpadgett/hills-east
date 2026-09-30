@@ -329,7 +329,6 @@ a { text-underline-offset: .2em; text-decoration-thickness: 1px; }
 .jack--room, .jackrow--room .tape--jack, .lamp-wrap { position: relative; z-index: 3; }
 .jack { z-index: 3; }
 .jackrow > .tape { position: relative; z-index: 3; }
-<<<<<<< HEAD
 
 /* Revision: centered monitor + two purpose-built dynamics faceplates. */
 .monitor { grid-template-columns: minmax(0,1fr); justify-items:center; gap:1.7rem; padding-block:2rem 2.6rem; }
@@ -436,5 +435,3 @@ html:not(.has-js) .stages { display:grid; gap:1.5rem; }
  .selector { gap:1rem; }
 }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
-=======
->>>>>>> 75e08d913f4d20a04910de330c6db61f4f569cb5

@@ -1,17 +1,16 @@
-<<<<<<< HEAD
 # Hills East Recording — rackmount revision
 
-Static HTML/CSS/JavaScript; local fonts and assets; no build step. **Not deployed.** Original implementation backed up to `/data/pat/hills-east-rackmount-before-revision` before editing.
+Static HTML/CSS/JavaScript; local fonts and assets; no build step. **Deployed** to https://hills-east.patpadgett.com via GitHub Pages (github.com/patpadgett/hills-east, branch `main`, `CNAME`). Pre-revision and pre-sampler snapshots live beside this directory (`../hills-east-rackmount-before-revision`, `../hills-east-rackmount-before-sampler`).
 
 ## Run locally
 
-From `/data/pat`:
+From this directory:
 
 ```sh
 python3 -m http.server 8768 --bind 127.0.0.1
 ```
 
-Open `http://127.0.0.1:8768/hills-east-rackmount/`.
+Open `http://127.0.0.1:8768/`.
 
 ## Revision
 
@@ -57,7 +56,7 @@ Two inspection rounds only. Screenshot vision review confirmed centered logo, si
 
 ## MPC-inspired pad sampler addition
 
-Backup before this addition: `/data/pat/hills-east-rackmount-before-sampler`. Latest source remains this directory. Nothing deployed.
+Backup before this addition: `../hills-east-rackmount-before-sampler`. Latest source remains this directory.
 
 - Reveal with footer RESET three times within two seconds; the new cream/graphite/red Hills East pad sampler sits below the preserved drums and monosynth. MPC-inspired hardware study, not an Akai product or endorsement.
 - Sixteen original synthesized PCM one-shots: deep kick, dust snare, closed/open hats, clap, rim, low/high tom, cowbell, shaker, tambourine, crash, sub bass, C-minor chord, mallet, space FX. Buffers render locally on first interaction; no audio downloads, microphone permissions, or autoplay.
@@ -85,8 +84,8 @@ Desktop/mobile rendered sampler screenshots received bounded visual review: no m
 **The booking endpoint and John's direct contact details are still missing. Nothing is sent.** Submitting a valid form displays “Not sent” and preserves text/route. There is no storage or delivery queue; reloading loses the draft. Retained “goes straight to John” copy describes the intended finished contact flow, not live delivery.
 
 Listen on actual speakers before shipping: automated probes verified Web Audio signal values, not perceived sound quality. Real-device touch and non-Chromium coverage remain for final review. Parent handles final review and publication decision.
-=======
-# Hills East Recording — rackmount edition
+
+## Background: the rack (original edition notes)
 
 The whole site is a 19" equipment rack. Every section is a rack unit (1U–6U) bolted between
 two rails; the content lives on faceplates and every control does something. Flat HTML/CSS/JS,
@@ -148,4 +147,3 @@ Sibling of ~/hills-east-recording/ (the tube-amp faceplate version); same conten
 - John's phone/email/booking link (PRODUCT.md placeholders) and the form endpoint.
 - Listen to the hidden rack on real speakers and tune levels; the kick is deliberately heavy.
 - Decide which edition ships: this one or ~/hills-east-recording/.
->>>>>>> 75e08d913f4d20a04910de330c6db61f4f569cb5
