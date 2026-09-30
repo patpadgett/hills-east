@@ -95,22 +95,26 @@
   const meterObserver=new IntersectionObserver(entries=>{entries.forEach(e=>e.isIntersecting?visibleUnits.add(e.target):visibleUnits.delete(e.target));syncFrames();});
   $$('#optical, #dynamics').forEach(e=>meterObserver.observe(e));
 
-  /* One owner for ident state; pause substitutes the poster rather than cropping a frame. */
-  const identImg=$('.crt-img'), identPic=identImg.closest('picture'), identBtn=$('#ident-toggle');
-  let identWanted=!reduced.matches, identVisible=true, identPlaying=null;
+  /* One owner for ident state. The poster paints first; the loop (a 330 KB H.264 file, not the old 1.6 MB
+     animated WebP) is fetched only after the page has loaded and only if motion is allowed. Pause shows the
+     current frame; the poster stays for reduced-motion and no-JS visitors. */
+  const identVideo=$('#ident'), identBtn=$('#ident-toggle'), identGlass=$('.crt-glass');
+  let identWanted=!reduced.matches, identVisible=true, identPlaying=null, identReady=false;
+  function loadIdent(){ if(identReady) return; identReady=true; identVideo.preload='auto'; identVideo.load(); }
   function syncIdent(){
     const playing=identWanted&&motionAllowed()&&!document.hidden&&identVisible;
     if(playing!==identPlaying){
-      let source=$('source',identPic);
-      if(playing){if(!source){source=document.createElement('source');source.type='image/webp';identPic.prepend(source);}source.srcset='assets/hills-east-ident.webp';identImg.src='assets/hills-east-ident.gif';}
-      else {source?.remove();identImg.src='assets/hills-east-poster.jpg';}
+      if(playing){ loadIdent(); identVideo.play().catch(()=>{ identWanted=false; syncIdent(); }); }
+      else identVideo.pause();
       identPlaying=playing;
     }
     identBtn.setAttribute('aria-pressed',String(playing));identBtn.textContent=playing?'Pause ident':'Play ident';
-    $('.crt-glass').style.animationPlayState=playing?'running':'paused';
+    identGlass.classList.toggle('is-paused',!playing);
   }
   identBtn.addEventListener('click',()=>{identWanted=!identPlaying;if(identWanted&&!reduced.matches&&paused){paused=false;syncMotion();}syncIdent();});
   new IntersectionObserver(entries=>{identVisible=entries[0].isIntersecting;syncIdent();}).observe($('.crt'));
+  // Never compete with fonts, CSS and the first paint: the loop waits for the load event (or 1.5 s, whichever is first).
+  { let kicked=false; const kick=()=>{ if(kicked) return; kicked=true; syncIdent(); }; if(identWanted&&motionAllowed()){ addEventListener('load',kick,{once:true}); setTimeout(kick,1500); } else kick(); }
   $('#lamp-level').addEventListener('input',e=>root.style.setProperty('--lamp',(0.15+e.target.value/100*.85).toFixed(3)));
   $('#scan-speed').addEventListener('input',e=>root.style.setProperty('--crt-period',(3.2/(.4+e.target.value/100*1.6)).toFixed(2)+'s'));
   root.style.setProperty('--lamp',(.15+.7*.85).toFixed(3));
@@ -129,12 +133,12 @@
     });
     ScrollTrigger.refresh();
   }
-  function syncMotion(){
+  function syncMotion({deferIdent=false}={}){
     root.classList.toggle('motion-paused',!motionAllowed());
     $('#motion-toggle').setAttribute('aria-pressed',String(paused||reduced.matches));
-    $('#motion-toggle').textContent=reduced.matches?'Reduced motion on':paused?'Resume motion':'Pause all motion';
+    $('#motion-toggle').textContent=reduced.matches?'Reduced motion on':paused?'Resume motion':'Pause motion';
     $('#motion-toggle').disabled=reduced.matches;
-    syncFrames();syncIdent();syncScroll();
+    syncFrames();if(!deferIdent)syncIdent();syncScroll();
     dispatchEvent(new CustomEvent('rack:motion',{detail:{paused:!motionAllowed()}}));
   }
   $('#motion-toggle').addEventListener('click',()=>{paused=!paused;syncMotion();});
@@ -157,7 +161,7 @@
     const i=input.value,o=output.value;
     const summary=i||o?`${routeLabels[i]||'Service undecided'} → John → ${routeLabels[o]||'Outcome undecided'}`:'';
     if(i)need.value=routeLabels[i];
-    $('#booking-route').textContent=summary||'No patch route selected.';
+    $('#booking-route').textContent=summary||'No patch route selected.';$('#booking-route').classList.toggle('is-empty',!summary);
     $('#booking-route-field').value=summary;
     $('#route-status').textContent=summary?(summary+(i&&o?' · Ready for your brief.':' · You can fill in the rest with John.')):'Choose a service and an outcome, or go straight to booking.';
     $('#route-lamp').classList.toggle('jewel--on',!!(i&&o));
@@ -199,6 +203,6 @@
     if(presses.length>=3){presses=[];if(!hidden.hidden)return;hidden.hidden=false;hidden.classList.add('is-in');window.HiddenRack?.mount(hidden);hidden.scrollIntoView({behavior:motionAllowed()?'smooth':'instant',block:'start'});window.ScrollTrigger?.refresh();}
   });
   new MutationObserver(()=>{if(!hidden.hidden&&!hidden.childElementCount){hidden.hidden=true;hidden.classList.remove('is-in');window.ScrollTrigger?.refresh();}}).observe(hidden,{childList:true});
-  syncMotion();
+  syncMotion({deferIdent:true});
   document.fonts.ready.then(()=>{draw();window.ScrollTrigger?.refresh();});
 })();

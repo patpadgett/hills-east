@@ -11,11 +11,11 @@ h=re.sub(r'<link rel="stylesheet" href="([^"]+)">',lambda m:'<style>\n'+(p/m.gro
 assets={}
 for folder in ['assets','fonts']:
  for f in (p/folder).iterdir():
-  if f.is_file() and f.suffix in ['.webp','.gif','.jpg','.svg','.woff2']:
+  if f.is_file() and f.suffix in ['.webp','.mp4','.jpg','.svg','.woff2']:
    mime=mimetypes.guess_type(str(f))[0] or 'application/octet-stream'
    assets[f.relative_to(p).as_posix()]='data:'+mime+';base64,'+base64.b64encode(f.read_bytes()).decode()
-# Use the same WebP as fallback on current iPhones; retain original GIF in JS dictionary only if needed.
-used=set(re.findall(r'(?:assets|fonts)/[\w.-]+',h))
+# The ident is a muted H.264 loop with a WebP poster; both are inlined as data URIs.
+used=set(re.findall(r'(?:assets|fonts)/[\w.-]+',h))-{'assets/hills-east-og.jpg'}
 for a in used:h=h.replace(a,assets[a])
 def script(m):
  s=(p/m.group(1)).read_text()
@@ -24,7 +24,7 @@ def script(m):
  return '<script>\n'+s.replace('</script','<\\/script')+'\n</script>'
 h=re.sub(r'<script src="([^"]+)" defer></script>',script,h)
 # Images needed by pause/resume are encoded once here, independently of initial markup.
-runtime={a:assets[a] for a in ['assets/hills-east-ident.webp','assets/hills-east-ident.gif','assets/hills-east-poster.jpg']}
+runtime={a:assets[a] for a in ['assets/hills-east-ident.mp4','assets/hills-east-poster.webp']}
 h=h.replace('<script>','<script>window.HILLS_ASSETS='+json.dumps(runtime)+';</script>\n<script>',1)
 out=p/'Hills-East-Recording.html';out.write_text(h)
 print(json.dumps({'path':str(out),'bytes':out.stat().st_size}))

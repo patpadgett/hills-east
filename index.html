@@ -6,14 +6,26 @@
 <title>Hills East Recording — Lenexa, Kansas</title>
 <meta name="description" content="Hills East Recording is John Matthews' one-room recording studio in Lenexa, Kansas. Tracking, mixing and finishing — you work directly with John.">
 <meta name="theme-color" content="#0b0b0c">
+<link rel="canonical" href="https://hills-east.patpadgett.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hills East Recording">
+<meta property="og:title" content="Hills East Recording — Lenexa, Kansas">
+<meta property="og:description" content="John Matthews' one-room recording studio in Lenexa, Kansas. Tracking, mixing and finishing — you work directly with John.">
+<meta property="og:url" content="https://hills-east.patpadgett.com/">
+<meta property="og:image" content="https://hills-east.patpadgett.com/assets/hills-east-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Hills East Recording ident: nested white triangles behind the studio's lettering">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/hills-east-poster.webp" as="image" type="image/webp">
 <link rel="preload" href="fonts/bigshoulders-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/michroma-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="sampler.css">
 </head>
 <body>
-<a class="skip" href="#book">Skip to booking</a>
+<a class="skip" href="#main">Skip to content</a><a class="skip" href="#book">Skip to booking</a>
 
 <div class="rack" id="rack">
   <div class="rail rail--l" aria-hidden="true"></div>
@@ -27,32 +39,37 @@
       <a href="#rack" class="brand">Hills East Recording</a>
       <span class="legend">Lenexa · Kansas</span>
     </div>
-    <nav class="id-nav" aria-label="Sections">
-      <a class="pushbtn" href="#room">Room</a>
-      <a class="pushbtn" href="#patch">Sessions</a>
-      <a class="pushbtn" href="#flow">How it works</a>
-      <a class="pushbtn pushbtn--red" href="#book">Book</a>
-    </nav>
+    <div class="id-controls">
+      <nav class="id-nav" aria-label="Sections">
+        <a class="pushbtn" href="#room">Room</a>
+        <a class="pushbtn" href="#patch">Sessions</a>
+        <a class="pushbtn" href="#flow">How it works</a>
+        <a class="pushbtn pushbtn--red" href="#book">Book</a>
+      </nav>
+      <button class="pushbtn motion-toggle" type="button" id="motion-toggle" aria-pressed="false">Pause motion</button>
+    </div>
   </header>
 
+  <main class="rack-main" id="main">
   <!-- 4U · monitor + hero -->
   <section class="unit u4 monitor" aria-labelledby="hero-title">
     <span class="screw tl"></span><span class="screw tr"></span><span class="screw bl"></span><span class="screw br"></span>
     <figure class="crt">
       <div class="crt-bezel">
-        <picture>
-          <source srcset="assets/hills-east-ident.webp" type="image/webp">
-          <img class="crt-img" src="assets/hills-east-ident.gif" width="480" height="480" decoding="async"
-               alt="Hills East Recording ident: nested white triangles zoom endlessly behind the studio's lettering">
-        </picture>
+        <video class="crt-img" id="ident" width="560" height="560" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback
+               poster="assets/hills-east-poster.webp"
+               aria-label="Hills East Recording ident: nested white triangles zoom endlessly behind the studio's lettering">
+          <source src="assets/hills-east-ident.mp4" type="video/mp4">
+        </video>
         <span class="crt-glass" aria-hidden="true"></span>
       </div>
-      <figcaption class="legend crt-cap">Monitor · studio ident <button class="pushbtn pushbtn--sm" type="button" id="ident-toggle" aria-pressed="true">Pause</button></figcaption>
-      <button class="pushbtn motion-toggle" type="button" id="motion-toggle" aria-pressed="false">Pause all motion</button>
+      <figcaption class="legend crt-cap"><span>Monitor · studio ident</span>
+        <span class="crt-controls"><button class="pushbtn pushbtn--sm" type="button" id="ident-toggle" aria-pressed="false">Play ident</button></span>
+      </figcaption>
     </figure>
 
     <div class="hero-face">
-      <h1 id="hero-title">Plug in.<br>Sound like <em>you.</em></h1>
+      <h1 id="hero-title">Plug in.<br> Sound like <em>you.</em></h1>
       <p class="lede">Hills East is John Matthews’ recording studio in Lenexa, Kansas — one room, one engineer who answers his own messages. Bring the songs and tell John what they need.</p>
 
       <div class="hero-controls">
@@ -176,7 +193,7 @@
       <div class="f"><label for="project">Project or band</label><input id="project" name="project"></div>
       <div class="f"><label for="need">What do you need?</label>
         <select id="need" name="need"><option>Tracking</option><option>Mixing</option><option>Finishing</option><option>The whole record</option><option>Not sure yet</option></select></div>
-      <div class="f f--wide booking-route"><span class="legend">Your session route</span><p id="booking-route" aria-live="polite">No patch route selected.</p><input type="hidden" id="booking-route-field" name="session_route" value=""></div>
+      <div class="f f--wide booking-route"><span class="legend">Your session route</span><p id="booking-route" class="is-empty" aria-live="polite">No patch route selected.</p><input type="hidden" id="booking-route-field" name="session_route" value=""></div>
       <div class="f f--wide"><label for="msg">Tell John about it</label><textarea id="msg" name="message" rows="5" required></textarea></div>
       <div class="f f--wide send-row">
         <button class="bigswitch bigswitch--btn" type="submit"><span class="bigswitch-lamp" aria-hidden="true"></span>Send to John<small>He replies directly</small></button>
@@ -184,6 +201,8 @@
       </div>
     </form>
   </section>
+
+  </main>
 
   <!-- 1U · power conditioner (reset = easter egg) -->
   <footer class="unit u1 power" aria-label="Site footer">

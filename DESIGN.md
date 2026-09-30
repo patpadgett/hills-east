@@ -21,6 +21,22 @@ colors:
   tape: "#e7dcbf"
   tape-ink: "#1a1710"
   field: "#f3eee0"
+  champ-label: "#3f3828"
+  silver-hi: "#f1f1eb"
+  silver: "#c9cbc7"
+  silver-2: "#b9bcb9"
+  silver-lo: "#959c9c"
+  silver-ink: "#202324"
+  silver-rule: "#727876"
+  silver-brand: "#94281f"
+  black-hi: "#292b2d"
+  black: "#111315"
+  black-2: "#101214"
+  black-lo: "#050606"
+  screenprint: "#e2e1d7"
+  led-amber: "#ffcb55"
+  led-off: "#47251c"
+  readout-amber: "#efcf83"
 typography:
   display:
     fontFamily: "Big Shoulders, Impact, Arial Narrow, sans-serif"
@@ -45,15 +61,27 @@ typography:
     lineHeight: 1.55
   label:
     fontFamily: "Michroma, Archivo, sans-serif"
-    fontSize: ".66rem"
+    fontSize: ".74rem"
     fontWeight: 400
     lineHeight: 1.3
     letterSpacing: ".14em"
+  control-label:
+    fontFamily: "Michroma, Archivo, sans-serif"
+    fontSize: ".72rem"
+    fontWeight: 400
+    lineHeight: 1
+    letterSpacing: ".14em"
+  readout:
+    fontFamily: "Archivo, system-ui, sans-serif"
+    fontSize: ".82rem"
+    fontWeight: 500
+    lineHeight: 1.2
   tape:
     fontFamily: "Caveat, Comic Sans MS, cursive"
     fontSize: "1.05rem"
     fontWeight: 700
     lineHeight: 1
+    note: "static 700 instance, Basic Latin subset (fonts/caveat-700-latin.woff2, 41 KB)"
 rounded:
   unit: "2px"
   control: "3px"
@@ -106,17 +134,21 @@ Fonts remain local Big Shoulders (equipment/headlines), Michroma (silkscreen), A
 
 Order: header; centered monitor/hero; silver leveling amplifier; black dynamics lab; session patchbay; room; stage selector; champagne booking; power conditioner; hidden instrument.
 
-The hero is single-column. `.monitor .crt` is `min(100%,680px)` with a square uncropped image and desktop 16px bezel. At 1440px the image is 648px wide and exactly centered; at 390px, mobile 10px bezel yields 298px. Image fit is `contain`, never cropped. Centered hero copy is capped at 660px; h1 is `clamp(2.5rem,4.2vw,3.6rem)`, line-height 1, with its old forced linebreak hidden. This deliberately prioritizes the large ident over fitting all copy above the fold.
+The hero is a two-column 4U unit above 900px: monitor left (`minmax(340px,50%)`, `.crt` at `min(100%, 62vh)` capped at 680px), copy right (`max-width: 34rem`, left-aligned, optically centred on the screen rather than on screen + caption row via `padding-bottom: 3.4rem`). The unit's `min-height` fills the first viewport minus the header so the headline, lede and Book switch are always inside the fold on desktop (verified 1440×900, 1280×720, 1024×768). Below 900px it stacks: centred monitor, then centred copy. The h1 keeps its `<br>` after "Plug in." (two lines at every width). Image fit is `contain`, never cropped.
+
+The monitor is a muted, looping, `playsinline` H.264 `<video>` (`assets/hills-east-ident.mp4`, 560², 328 KB) with a WebP poster (`assets/hills-east-poster.webp`, 36 KB) and `preload="none"`. `script.js` owns playback: the loop is fetched only after `load` (or 1.5 s), only when motion is allowed, the tab is visible and the monitor intersects the viewport. Reduced-motion and no-JS visitors see the poster only. The old 1.6 MB animated WebP and 6.8 MB GIF are gone.
+
+Caption row: `MONITOR · STUDIO IDENT` left, `Play/Pause ident` right, one line, flush with the bezel. The global motion toggle (`Pause motion / Resume motion / Reduced motion on`) sits on the 1U header beside the nav; the header is one row down to 1120px (below which the location legend is dropped, since the location repeats in the lede and footer).
 Ident uses local animated WebP with GIF fallback. Pause replaces it with the existing poster, not a frozen animation frame. Offscreen/hidden document also swaps to the poster. Caption provides ident pause; the separate motion control governs all visual loops and scroll effects.
 ## Silver leveling amplifier
 
-LA-2A-inspired, not a replica: cool brushed plate `#c9cbc7`/`#b9bcb9`, dark ink, red italic Hills East upper-left wordmark, restrained Studio Leveling Amplifier title, central amber beveled VU, large black Gain left and Peak Reduction right. The double-rule base suggests a hardware seam. No decorative fake switches were added.
+LA-2A-inspired, not a replica: cool brushed plate (`silver-hi → silver → silver-2 → silver-lo` tokens), `silver-ink` lettering, red italic Hills East upper-left wordmark, restrained Studio Leveling Amplifier title, central amber beveled VU, large black Gain left and Peak Reduction right. The double-rule base suggests a hardware seam. No decorative fake switches were added.
 
-Desktop face grid is `1fr minmax(180px,280px) 1fr`; knobs 94px. Mobile retains left/meter/right arrangement using `1fr minmax(106px,1.25fr) 1fr`, 56px knobs and 5px meter bevel. Mobile −/+ controls stack under each knob with 44px targets. One central VU keeps the recognizable composition; this is not stereo audio metering. SVG needle transform is owned by JS, not overridden in CSS.
+Desktop face grid is `1fr minmax(180px,280px) 1fr` (areas `gain meter peak`); knobs 94px. Mobile restacks to `meter meter / gain peak`: full-width VU on top, two 72px knobs below with their 44px −/+ pairs. Knob legends reserve a 2.6em two-line height so `Peak reduction` wrapping never misaligns the two columns. Readouts (`62%`, `110 ms`) use the body face at `.82rem` 500 with tabular numerals — Michroma's `%` glyph reads as `º/o`. One central VU keeps the recognizable composition; this is not stereo audio metering. SVG needle transform is owned by JS, not overridden in CSS.
 
 ## Black dynamics lab
 
-Distressor-inspired black plate, rounded 2px off-white screenprint border, top reduction LED scale 1/2/3/4/6/8/10/12, silver four-knob Input/Attack/Release/Output row, six ratio buttons (1:1 through 20:1), numerical readout, brief instructions. Silver knobs are 72px desktop, 62px mobile. Four-column desktop becomes an ordered 2×2 mobile grid; the ratio bank wraps. The optics and typography are retained without reproducing manufacturer branding.
+Distressor-inspired black plate (`black-hi → black → black-2 → black-lo`, `screenprint` frame, `led-amber`/`led-off`, `readout-amber`), rounded 2px off-white screenprint border, top reduction LED scale 1/2/3/4/6/8/10/12, silver four-knob Input/Attack/Release/Output row, six ratio buttons (1:1 through 20:1), numerical readout, brief instructions. Silver knobs are 72px desktop, 62px mobile. Four-column desktop becomes an ordered 2×2 mobile grid; the ratio bank wraps. The optics and typography are retained without reproducing manufacturer branding.
 
 All public processing names refer to the **meter demo only**. A normalized periodic pulse feeds a simple threshold/ratio display formula. Input scales its source; Ratio reduces the amount above 0.22; Output and Gain scale the remaining display level; Peak Reduction attenuates it. The reduction readout uses demo dB, not calibrated audio dB. Attack spans 10–410ms; Release 80–1280ms and controls exponential visual response. Static/reduced states still respond to settings, with settings text describing time values. Knob controls are vertical ARIA sliders with formatted values, visible readouts and −/+ alternatives. Wheel changes only focused knobs so ordinary wheel scrolling is not trapped.
 The meter demo does not consume `hiddenrack:audio`; hidden audio is independently playable and its levels API remains available.

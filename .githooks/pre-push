@@ -1,0 +1,14 @@
+#!/bin/sh
+# Refuse to push conflict markers or unparseable scripts (this is what shipped in 4b784ba).
+set -e
+cd "$(git rev-parse --show-toplevel)"
+if git diff --check HEAD~0 --cached >/dev/null 2>&1; then :; fi
+if git grep -nE '^(<<<<<<< |=======$|>>>>>>> )' -- ':!*.md' ':!.impeccable/**' >/dev/null 2>&1; then
+  echo "pre-push: conflict markers found in tracked files:" >&2
+  git grep -nE '^(<<<<<<< |=======$|>>>>>>> )' -- ':!*.md' ':!.impeccable/**' >&2
+  exit 1
+fi
+for f in script.js hidden-rack.js pad-sampler.js; do
+  [ -f "$f" ] && node --check "$f"
+done
+echo "pre-push: markers clean, scripts parse"
