@@ -1,0 +1,261 @@
+[
+  {
+    "width": 1440,
+    "removed": {
+      "optical": false,
+      "dynamics": false,
+      "patch": false,
+      "jack": false,
+      "route": false,
+      "service": false,
+      "motionToggle": false,
+      "navVideos": "Videos",
+      "h2": "Playback",
+      "units": [
+        "unit u1 id-unit",
+        "unit u4 monitor",
+        "player",
+        "room",
+        "flow",
+        "book",
+        "unit u1 power",
+        "hidden-rack"
+      ]
+    },
+    "initial": {
+      "playDisabled": true,
+      "stopDisabled": true,
+      "status": "",
+      "now": "no source",
+      "idleVisible": true,
+      "levelL": "0.0000",
+      "levelR": "0.0000",
+      "needleL": "rotate(-48 100 100)",
+      "ticks": 22,
+      "sources": [
+        "RE-oPaanCas",
+        "ZrAWnT-ecWM"
+      ],
+      "running": "false"
+    },
+    "playing": {
+      "status": "",
+      "now": "Internal — Beneath The Skin",
+      "pressed": "true",
+      "playPressed": "true",
+      "playLabel": "Pause",
+      "playDisabled": false,
+      "stopDisabled": false,
+      "signal": "jewel jewel--on",
+      "idleHidden": true,
+      "frameHidden": false,
+      "iframes": 1,
+      "levelL": "0.2293",
+      "levelR": "0.2530",
+      "ladderOn": 3,
+      "needleL": "rotate(-25.065090004351607 100 100)",
+      "running": "true",
+      "apiScript": true
+    },
+    "meterLater": {
+      "levelL": "0.3047",
+      "needleL": "rotate(-17.525130265936685 100 100)"
+    },
+    "paused": {
+      "status": "",
+      "playPressed": "false",
+      "signal": "jewel",
+      "levelL": "0.0388"
+    },
+    "switched": {
+      "now": "Fade Away — Beneath The Skin",
+      "status": "",
+      "pressed2": "true",
+      "pressed1": "false",
+      "levelL": "0.2308"
+    },
+    "stopped": {
+      "status": "",
+      "idleVisible": true,
+      "frameHidden": true,
+      "levelL": "0.0273",
+      "needleL": "rotate(-45.2656483944421 100 100)"
+    },
+    "motionPaused": {
+      "running": "false",
+      "levelL": "0.0000"
+    },
+    "reduced": {
+      "running": "false",
+      "levelL": "0.0000"
+    },
+    "egg": {
+      "visible": true,
+      "steps": 64,
+      "keys": 25
+    },
+    "form": "Not sent — this form isn’t connected yet. Your text is still here; John’s direct contact details will replace this note once he supplies them.",
+    "overflow": {
+      "scroll": 1440,
+      "client": 1440,
+      "offenders": []
+    },
+    "errors": [],
+    "youtube": [],
+    "assertions": {
+      "removed": true,
+      "initial": true,
+      "noDemoNote": true,
+      "loaded": true,
+      "meterMoved": true,
+      "ladder": true,
+      "paused": true,
+      "switched": true,
+      "stopped": true,
+      "motionPaused": true,
+      "reduced": true,
+      "egg": true,
+      "form": true,
+      "overflow": true,
+      "errors": true
+    }
+  },
+  {
+    "width": 390,
+    "removed": {
+      "optical": false,
+      "dynamics": false,
+      "patch": false,
+      "jack": false,
+      "route": false,
+      "service": false,
+      "motionToggle": false,
+      "navVideos": "Videos",
+      "h2": "Playback",
+      "units": [
+        "unit u1 id-unit",
+        "unit u4 monitor",
+        "player",
+        "room",
+        "flow",
+        "book",
+        "unit u1 power",
+        "hidden-rack"
+      ]
+    },
+    "initial": {
+      "playDisabled": true,
+      "stopDisabled": true,
+      "status": "",
+      "now": "no source",
+      "idleVisible": true,
+      "levelL": "0.0000",
+      "levelR": "0.0000",
+      "needleL": "rotate(-48 100 100)",
+      "ticks": 22,
+      "sources": [
+        "RE-oPaanCas",
+        "ZrAWnT-ecWM"
+      ],
+      "running": "false"
+    },
+    "playing": {
+      "status": "",
+      "now": "Internal — Beneath The Skin",
+      "pressed": "true",
+      "playPressed": "true",
+      "playLabel": "Pause",
+      "playDisabled": false,
+      "stopDisabled": false,
+      "signal": "jewel jewel--on",
+      "idleHidden": true,
+      "frameHidden": false,
+      "iframes": 1,
+      "levelL": "0.2790",
+      "levelR": "0.2694",
+      "ladderOn": 3,
+      "needleL": "rotate(-20.099258924737985 100 100)",
+      "running": "true",
+      "apiScript": true
+    },
+    "meterLater": {
+      "levelL": "0.3099",
+      "needleL": "rotate(-17.011071912526667 100 100)"
+    },
+    "paused": {
+      "status": "",
+      "playPressed": "false",
+      "signal": "jewel",
+      "levelL": "0.0411"
+    },
+    "switched": {
+      "now": "Fade Away — Beneath The Skin",
+      "status": "",
+      "pressed2": "true",
+      "pressed1": "false",
+      "levelL": "0.2356"
+    },
+    "stopped": {
+      "status": "",
+      "idleVisible": true,
+      "frameHidden": true,
+      "levelL": "0.0260",
+      "needleL": "rotate(-45.40040261581325 100 100)"
+    },
+    "motionPaused": {
+      "running": "false",
+      "levelL": "0.0000"
+    },
+    "reduced": {
+      "running": "false",
+      "levelL": "0.0000"
+    },
+    "egg": {
+      "visible": true,
+      "steps": 64,
+      "keys": 25
+    },
+    "form": "Not sent — this form isn’t connected yet. Your text is still here; John’s direct contact details will replace this note once he supplies them.",
+    "overflow": {
+      "scroll": 390,
+      "client": 390,
+      "offenders": []
+    },
+    "errors": [],
+    "youtube": [],
+    "assertions": {
+      "removed": true,
+      "initial": true,
+      "noDemoNote": true,
+      "loaded": true,
+      "meterMoved": true,
+      "ladder": true,
+      "paused": true,
+      "switched": true,
+      "stopped": true,
+      "motionPaused": true,
+      "reduced": true,
+      "egg": true,
+      "form": true,
+      "overflow": true,
+      "errors": true
+    }
+  },
+  {
+    "noJS": {
+      "hero": true,
+      "player": true,
+      "sources": 2,
+      "noScriptLinks": 2,
+      "stages": 3,
+      "booking": true,
+      "unitIds": [
+        "player",
+        "room",
+        "flow",
+        "book",
+        "hidden-rack"
+      ]
+    }
+  }
+]

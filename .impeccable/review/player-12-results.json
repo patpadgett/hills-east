@@ -1,0 +1,265 @@
+[
+  {
+    "width": 1440,
+    "removed": {
+      "optical": false,
+      "dynamics": false,
+      "patch": false,
+      "jack": false,
+      "route": false,
+      "service": false,
+      "navVideos": "Videos",
+      "h2": "Playback",
+      "units": [
+        "unit u1 id-unit",
+        "unit u4 monitor",
+        "player",
+        "playlist",
+        "room",
+        "flow",
+        "book",
+        "unit u1 power",
+        "hidden-rack"
+      ]
+    },
+    "initial": {
+      "playDisabled": true,
+      "stopDisabled": true,
+      "status": "No source selected.",
+      "now": "no source",
+      "idleVisible": true,
+      "levelL": "0.0000",
+      "levelR": "0.0000",
+      "needleL": "rotate(-48 100 100)",
+      "ticks": 22,
+      "sources": [
+        "RE-oPaanCas",
+        "ZrAWnT-ecWM"
+      ],
+      "running": "false"
+    },
+    "playing": {
+      "status": "Playing · Internal — Beneath The Skin",
+      "now": "Internal — Beneath The Skin",
+      "pressed": "true",
+      "playPressed": "true",
+      "playLabel": "Pause",
+      "playDisabled": false,
+      "stopDisabled": false,
+      "signal": "jewel jewel--on",
+      "idleHidden": true,
+      "frameHidden": false,
+      "iframes": 1,
+      "levelL": "0.2488",
+      "levelR": "0.2287",
+      "ladderOn": 3,
+      "needleL": "rotate(-23.121931670569875 100 100)",
+      "running": "true",
+      "apiScript": true
+    },
+    "meterLater": {
+      "levelL": "0.4169",
+      "needleL": "rotate(-6.312914176600614 100 100)"
+    },
+    "paused": {
+      "status": "Paused · Internal — Beneath The Skin",
+      "playPressed": "false",
+      "signal": "jewel",
+      "levelL": "0.0461"
+    },
+    "switched": {
+      "now": "Fade Away — Beneath The Skin",
+      "status": "Playing · Fade Away — Beneath The Skin",
+      "pressed2": "true",
+      "pressed1": "false",
+      "levelL": "0.2644"
+    },
+    "stopped": {
+      "status": "Stopped · Fade Away — Beneath The Skin",
+      "idleVisible": true,
+      "frameHidden": true,
+      "levelL": "0.0302",
+      "needleL": "rotate(-44.97599985292926 100 100)"
+    },
+    "motionPaused": {
+      "running": "false",
+      "levelL": "0.0000"
+    },
+    "reduced": {
+      "running": "false",
+      "levelL": "0.0000"
+    },
+    "egg": {
+      "visible": true,
+      "steps": 64,
+      "keys": 25
+    },
+    "form": "Not sent — this form isn’t connected yet. Your text is still here; John’s direct contact details will replace this note once he supplies them.",
+    "overflow": {
+      "scroll": 1440,
+      "client": 1440,
+      "offenders": []
+    },
+    "errors": [],
+    "youtube": [
+      "Failed to load resource: net::ERR_NAME_NOT_RESOLVED",
+      "Failed to load resource: net::ERR_NETWORK_CHANGED",
+      "Failed to load resource: net::ERR_NETWORK_CHANGED",
+      "Failed to load resource: net::ERR_ADDRESS_UNREACHABLE"
+    ],
+    "assertions": {
+      "removed": true,
+      "initial": true,
+      "loaded": true,
+      "meterMoved": true,
+      "ladder": true,
+      "paused": true,
+      "switched": true,
+      "stopped": true,
+      "motionPaused": true,
+      "reduced": true,
+      "egg": true,
+      "form": true,
+      "overflow": true,
+      "errors": true
+    }
+  },
+  {
+    "width": 390,
+    "removed": {
+      "optical": false,
+      "dynamics": false,
+      "patch": false,
+      "jack": false,
+      "route": false,
+      "service": false,
+      "navVideos": "Videos",
+      "h2": "Playback",
+      "units": [
+        "unit u1 id-unit",
+        "unit u4 monitor",
+        "player",
+        "playlist",
+        "room",
+        "flow",
+        "book",
+        "unit u1 power",
+        "hidden-rack"
+      ]
+    },
+    "initial": {
+      "playDisabled": true,
+      "stopDisabled": true,
+      "status": "No source selected.",
+      "now": "no source",
+      "idleVisible": true,
+      "levelL": "0.0000",
+      "levelR": "0.0000",
+      "needleL": "rotate(-48 100 100)",
+      "ticks": 22,
+      "sources": [
+        "RE-oPaanCas",
+        "ZrAWnT-ecWM"
+      ],
+      "running": "false"
+    },
+    "playing": {
+      "status": "Playing · Internal — Beneath The Skin",
+      "now": "Internal — Beneath The Skin",
+      "pressed": "true",
+      "playPressed": "true",
+      "playLabel": "Pause",
+      "playDisabled": false,
+      "stopDisabled": false,
+      "signal": "jewel jewel--on",
+      "idleHidden": true,
+      "frameHidden": false,
+      "iframes": 1,
+      "levelL": "0.2443",
+      "levelR": "0.1865",
+      "ladderOn": 3,
+      "needleL": "rotate(-23.573834122425488 100 100)",
+      "running": "true",
+      "apiScript": true
+    },
+    "meterLater": {
+      "levelL": "0.3696",
+      "needleL": "rotate(-11.037635106952884 100 100)"
+    },
+    "paused": {
+      "status": "Paused · Internal — Beneath The Skin",
+      "playPressed": "false",
+      "signal": "jewel",
+      "levelL": "0.0406"
+    },
+    "switched": {
+      "now": "Fade Away — Beneath The Skin",
+      "status": "Playing · Fade Away — Beneath The Skin",
+      "pressed2": "true",
+      "pressed1": "false",
+      "levelL": "0.2318"
+    },
+    "stopped": {
+      "status": "Stopped · Fade Away — Beneath The Skin",
+      "idleVisible": true,
+      "frameHidden": true,
+      "levelL": "0.0238",
+      "needleL": "rotate(-45.6162316764823 100 100)"
+    },
+    "motionPaused": {
+      "running": "false",
+      "levelL": "0.0000"
+    },
+    "reduced": {
+      "running": "false",
+      "levelL": "0.0000"
+    },
+    "egg": {
+      "visible": true,
+      "steps": 64,
+      "keys": 25
+    },
+    "form": "Not sent — this form isn’t connected yet. Your text is still here; John’s direct contact details will replace this note once he supplies them.",
+    "overflow": {
+      "scroll": 390,
+      "client": 390,
+      "offenders": []
+    },
+    "errors": [],
+    "youtube": [],
+    "assertions": {
+      "removed": true,
+      "initial": true,
+      "loaded": true,
+      "meterMoved": true,
+      "ladder": true,
+      "paused": true,
+      "switched": true,
+      "stopped": true,
+      "motionPaused": true,
+      "reduced": true,
+      "egg": true,
+      "form": true,
+      "overflow": true,
+      "errors": true
+    }
+  },
+  {
+    "noJS": {
+      "hero": true,
+      "player": true,
+      "sources": 2,
+      "noScriptLinks": 2,
+      "stages": 3,
+      "booking": true,
+      "unitIds": [
+        "player",
+        "playlist",
+        "room",
+        "flow",
+        "book",
+        "hidden-rack"
+      ]
+    }
+  }
+]

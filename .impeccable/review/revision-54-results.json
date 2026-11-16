@@ -1,0 +1,111 @@
+[
+  {
+    "width": 1440,
+    "hero": {
+      "centerError": 263.8046875,
+      "fit": "contain",
+      "imgWidth": 495.609375
+    },
+    "ident": {
+      "paused": true,
+      "label": "Play ident",
+      "text": "",
+      "src": "http://127.0.0.1:8768/hills-east-rackmount/assets/hills-east-ident.mp4"
+    },
+    "stage": {
+      "value": "2",
+      "text": "Finish",
+      "on": "2"
+    },
+    "room": {
+      "spec": 4,
+      "ladder": 12
+    },
+    "motion": {
+      "triggers": 0,
+      "meter": "false"
+    },
+    "egg": {
+      "visible": true,
+      "steps": 64,
+      "keys": 25,
+      "pads": 16
+    },
+    "form": "This form has no server behind it, so nothing is sent — call or email John directly and he’ll reply.",
+    "overflow": {
+      "scroll": 1440,
+      "client": 1440
+    },
+    "errors": [],
+    "assertions": {
+      "hero": true,
+      "ident": true,
+      "stage": true,
+      "room": true,
+      "motion": true,
+      "egg": true,
+      "form": true,
+      "overflow": true,
+      "errors": true
+    }
+  },
+  {
+    "width": 390,
+    "hero": {
+      "centerError": 0,
+      "fit": "contain",
+      "imgWidth": 298
+    },
+    "ident": {
+      "paused": true,
+      "label": "Play ident",
+      "text": "",
+      "src": "http://127.0.0.1:8768/hills-east-rackmount/assets/hills-east-ident.mp4"
+    },
+    "stage": {
+      "value": "2",
+      "text": "Finish",
+      "on": "2"
+    },
+    "room": {
+      "spec": 4,
+      "ladder": 12
+    },
+    "motion": {
+      "triggers": 0,
+      "meter": "false"
+    },
+    "egg": {
+      "visible": true,
+      "steps": 64,
+      "keys": 25,
+      "pads": 16
+    },
+    "form": "This form has no server behind it, so nothing is sent — call or email John directly and he’ll reply.",
+    "overflow": {
+      "scroll": 390,
+      "client": 390
+    },
+    "errors": [],
+    "assertions": {
+      "hero": true,
+      "ident": true,
+      "stage": true,
+      "room": true,
+      "motion": true,
+      "egg": true,
+      "form": true,
+      "overflow": true,
+      "errors": true
+    }
+  },
+  {
+    "noJS": {
+      "hero": true,
+      "stages": 3,
+      "booking": true,
+      "player": true,
+      "noScriptLinks": 2
+    }
+  }
+]

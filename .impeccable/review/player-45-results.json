@@ -1,0 +1,261 @@
+[
+  {
+    "width": 1440,
+    "removed": {
+      "optical": false,
+      "dynamics": false,
+      "patch": false,
+      "jack": false,
+      "route": false,
+      "service": false,
+      "motionToggle": false,
+      "navVideos": "Videos",
+      "h2": "Playback",
+      "units": [
+        "unit u1 id-unit",
+        "unit u4 monitor",
+        "player",
+        "room",
+        "flow",
+        "book",
+        "unit u1 power",
+        "hidden-rack"
+      ]
+    },
+    "initial": {
+      "playDisabled": true,
+      "stopDisabled": true,
+      "status": "",
+      "now": "no source",
+      "idleVisible": true,
+      "levelL": "0.0000",
+      "levelR": "0.0000",
+      "needleL": "rotate(-48 100 100)",
+      "ticks": 22,
+      "sources": [
+        "RE-oPaanCas",
+        "ZrAWnT-ecWM"
+      ],
+      "running": "false"
+    },
+    "playing": {
+      "status": "",
+      "now": "Internal — Beneath The Skin",
+      "pressed": "true",
+      "playPressed": "true",
+      "playLabel": "Pause",
+      "playDisabled": false,
+      "stopDisabled": false,
+      "signal": "jewel jewel--on",
+      "idleHidden": true,
+      "frameHidden": false,
+      "iframes": 1,
+      "levelL": "0.0745",
+      "levelR": "0.0707",
+      "ladderOn": 1,
+      "needleL": "rotate(-40.54633759682579 100 100)",
+      "running": "true",
+      "apiScript": true
+    },
+    "meterLater": {
+      "levelL": "0.4483",
+      "needleL": "rotate(-3.1679551140663236 100 100)"
+    },
+    "paused": {
+      "status": "",
+      "playPressed": "false",
+      "signal": "jewel",
+      "levelL": "0.0469"
+    },
+    "switched": {
+      "now": "Fade Away — Beneath The Skin",
+      "status": "",
+      "pressed2": "true",
+      "pressed1": "false",
+      "levelL": "0.0368"
+    },
+    "stopped": {
+      "status": "",
+      "idleVisible": true,
+      "frameHidden": true,
+      "levelL": "0.0037",
+      "needleL": "rotate(-47.63191697004353 100 100)"
+    },
+    "motionPaused": {
+      "running": "false",
+      "levelL": "0.0000"
+    },
+    "reduced": {
+      "running": "false",
+      "levelL": "0.0000"
+    },
+    "egg": {
+      "visible": true,
+      "steps": 64,
+      "keys": 25
+    },
+    "form": "This form has no server behind it, so nothing is sent — call or email John directly and he’ll reply.",
+    "overflow": {
+      "scroll": 1440,
+      "client": 1440,
+      "offenders": []
+    },
+    "errors": [],
+    "youtube": [],
+    "assertions": {
+      "removed": true,
+      "initial": true,
+      "noDemoNote": true,
+      "loaded": true,
+      "meterMoved": true,
+      "ladder": true,
+      "paused": true,
+      "switched": true,
+      "stopped": true,
+      "motionPaused": true,
+      "reduced": true,
+      "egg": true,
+      "form": true,
+      "overflow": true,
+      "errors": true
+    }
+  },
+  {
+    "width": 390,
+    "removed": {
+      "optical": false,
+      "dynamics": false,
+      "patch": false,
+      "jack": false,
+      "route": false,
+      "service": false,
+      "motionToggle": false,
+      "navVideos": "Videos",
+      "h2": "Playback",
+      "units": [
+        "unit u1 id-unit",
+        "unit u4 monitor",
+        "player",
+        "room",
+        "flow",
+        "book",
+        "unit u1 power",
+        "hidden-rack"
+      ]
+    },
+    "initial": {
+      "playDisabled": true,
+      "stopDisabled": true,
+      "status": "",
+      "now": "no source",
+      "idleVisible": true,
+      "levelL": "0.0000",
+      "levelR": "0.0000",
+      "needleL": "rotate(-48 100 100)",
+      "ticks": 22,
+      "sources": [
+        "RE-oPaanCas",
+        "ZrAWnT-ecWM"
+      ],
+      "running": "false"
+    },
+    "playing": {
+      "status": "",
+      "now": "Internal — Beneath The Skin",
+      "pressed": "true",
+      "playPressed": "true",
+      "playLabel": "Pause",
+      "playDisabled": false,
+      "stopDisabled": false,
+      "signal": "jewel jewel--on",
+      "idleHidden": true,
+      "frameHidden": false,
+      "iframes": 1,
+      "levelL": "0.0680",
+      "levelR": "0.0501",
+      "ladderOn": 1,
+      "needleL": "rotate(-41.204566964995564 100 100)",
+      "running": "true",
+      "apiScript": true
+    },
+    "meterLater": {
+      "levelL": "0.2479",
+      "needleL": "rotate(-23.213626718104184 100 100)"
+    },
+    "paused": {
+      "status": "",
+      "playPressed": "false",
+      "signal": "jewel",
+      "levelL": "0.0312"
+    },
+    "switched": {
+      "now": "Fade Away — Beneath The Skin",
+      "status": "",
+      "pressed2": "true",
+      "pressed1": "false",
+      "levelL": "0.1145"
+    },
+    "stopped": {
+      "status": "",
+      "idleVisible": true,
+      "frameHidden": true,
+      "levelL": "0.0163",
+      "needleL": "rotate(-46.36798401308664 100 100)"
+    },
+    "motionPaused": {
+      "running": "false",
+      "levelL": "0.0000"
+    },
+    "reduced": {
+      "running": "false",
+      "levelL": "0.0000"
+    },
+    "egg": {
+      "visible": true,
+      "steps": 64,
+      "keys": 25
+    },
+    "form": "This form has no server behind it, so nothing is sent — call or email John directly and he’ll reply.",
+    "overflow": {
+      "scroll": 390,
+      "client": 390,
+      "offenders": []
+    },
+    "errors": [],
+    "youtube": [],
+    "assertions": {
+      "removed": true,
+      "initial": true,
+      "noDemoNote": true,
+      "loaded": true,
+      "meterMoved": true,
+      "ladder": true,
+      "paused": true,
+      "switched": true,
+      "stopped": true,
+      "motionPaused": true,
+      "reduced": true,
+      "egg": true,
+      "form": true,
+      "overflow": true,
+      "errors": true
+    }
+  },
+  {
+    "noJS": {
+      "hero": true,
+      "player": true,
+      "sources": 2,
+      "noScriptLinks": 2,
+      "stages": 3,
+      "booking": true,
+      "unitIds": [
+        "player",
+        "room",
+        "flow",
+        "book",
+        "hidden-rack"
+      ]
+    }
+  }
+]

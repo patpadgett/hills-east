@@ -1,35 +1,32 @@
-/* Hills East: native-scroll rack, visual meter demo, booking routes, hidden instrument. */
+/* Hills East: native-scroll rack, playback unit with meter demo, booking, hidden instrument. */
 (() => {
   'use strict';
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const root = document.documentElement;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  // matchMedia() returns a fresh list each call in some engines and a cached list can go
+  // stale under emulation, so read the live state instead of trusting the cached object.
+  const reducedOn = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
   root.classList.add('has-js');
   $('[data-year]')?.replaceChildren(String(new Date().getFullYear()));
-  let paused = false;
-  const motionAllowed = () => !paused && !reduced.matches;
-  const state = { gain:62, peak:35, input:62, attack:25, release:45, output:65, stage:0, ratio:4 };
+  const motionAllowed = () => !reducedOn();
+  const state = { stage: 0 };
   const setters = {};
-  let updateDemo = () => {};
-  function format(key,v) {
-    if (key === 'attack') return Math.round(10 + v * 4) + ' ms';
-    if (key === 'release') return Math.round(80 + v * 12) + ' ms';
-    return Math.round(v) + '%';
-  }
   $$('.knob').forEach(el => {
     const key = el.dataset.knob, max = +el.getAttribute('aria-valuemax'), stepped = !!el.dataset.steps;
+    if (!(key in state)) state[key] = +el.getAttribute('aria-valuenow') || 0;
     const set = setters[key] = v => {
       state[key] = clamp(stepped ? Math.round(v) : v,0,max);
       const n = state[key];
       el.style.setProperty('--a', (-135+n/max*270)+'deg');
       el.style.setProperty('--sweep', n/max*270+'deg');
       el.setAttribute('aria-valuenow',Math.round(n));
-      el.setAttribute('aria-valuetext', stepped ? ['Talk','Track','Finish'][n] : format(key,n));
-      const out = $(`[data-value="${key}"]`); if (out) out.textContent = format(key,n);
+      el.setAttribute('aria-valuetext', stepped ? ['Talk','Track','Finish'][n] : Math.round(n)+'%');
+      const out = $(`[data-value="${key}"]`); if (out) out.textContent = Math.round(n)+'%';
       if (key === 'stage') $$('.stage').forEach(s => s.classList.toggle('is-on',+s.dataset.stage===n));
-      else updateDemo();
+      else window.RackKnobs?.actions?.[key]?.(n);
     };
     set(state[key]);
     let drag = null;
@@ -44,62 +41,139 @@
     // Wheel adjusts only a focused control, leaving normal page scrolling alone.
     el.addEventListener('wheel',e=>{if(document.activeElement!==el)return;e.preventDefault();set(state[key]-Math.sign(e.deltaY)*(stepped?1:4));},{passive:false});
   });
-  $$('[data-adjust]').forEach(b=>b.addEventListener('click',()=>setters[b.dataset.adjust](state[b.dataset.adjust]+Number(b.dataset.direction)*5)));
-  $$('[data-ratio]').forEach(b=>b.addEventListener('click',()=>{
-    state.ratio=+b.dataset.ratio;
-    $$('[data-ratio]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
-    updateDemo();
-  }));
 
-  /* Visual mathematics only. No audio nodes or hidden-rack audio are processed here. */
-  const needles=$$('.vu-needle'), leds=$$('.reduction-leds i'), ladders=$$('.ladder-leds');
+  /* Every VU on the page shares the same scale. */
   $$('.vu-ticks').forEach(g=>{for(let i=0;i<=10;i++){
     const a=(-80+i*16)*Math.PI/180,l=document.createElementNS('http://www.w3.org/2000/svg','line');
     l.setAttribute('x1',100+85*Math.sin(a));l.setAttribute('y1',100-85*Math.cos(a));
     l.setAttribute('x2',100+(i%5?78:72)*Math.sin(a));l.setAttribute('y2',100-(i%5?78:72)*Math.cos(a));g.append(l);
   }});
+  /* Room and power ladders follow the same level as the meter bridge. */
+  const ladders=$$('.ladder-leds');
   ladders.forEach(l=>{for(let i=0;i<12;i++){const b=document.createElement('i');if(i>=8)b.classList.add(i>=11?'peak':'hot');l.append(b);}});
-  let level=.3, reduction=0, phase=0, last=0, frameId=0;
-  const visibleUnits=new Set();
-  function responseSeconds(rising) { return rising ? (10+state.attack*4)/1000 : (80+state.release*12)/1000; }
-  const demo = pulse => {
-    const input=state.input/100*pulse;
-    const gr=Math.max(0,input-.22)*(1-1/state.ratio);
-    return {level:clamp((input-gr)*(state.output/65)*(state.gain/62)*(1-state.peak/150),0,1),gr:gr*24};
-  };
-  function paint(){
-    needles.forEach((n,i)=>n.setAttribute('transform',`rotate(${-48+level*(i?94:100)} 100 100)`));
-    [1,2,3,4,6,8,10,12].forEach((v,i)=>leds[i].classList.toggle('on',reduction>=v));
-    $('#demo-reduction').textContent=reduction.toFixed(1)+' demo dB';
-    $('#dynamics').dataset.demoLevel=level.toFixed(4);
-    $('#dynamics').dataset.demoReduction=reduction.toFixed(4);
-    $('#dynamics').dataset.attackResponse=(1-Math.exp(-.1/responseSeconds(true))).toFixed(4);
-    $('#dynamics').dataset.releaseResponse=(1-Math.exp(-.1/responseSeconds(false))).toFixed(4);
-    ladders.forEach(l=>[...l.children].forEach((b,i)=>b.classList.toggle('on',i<Math.round(level*12))));
+
+  /* ---------- 4U playback: two YouTube sources, transport, stereo meter demo ----------
+     The iframe's audio is cross-origin and is never measured. The needles follow the
+     transport state with a simulated programme level — a visual demo, not a meter of
+     the video's audio. */
+  const playerEl=$('#player'), screenHolder=$('#screen-holder'), screenFrame=$('#screen-frame'), screenIdle=$('#screen-idle');
+  const nowSource=$('#now-source'), statusEl=$('#player-status'), playBtn=$('#player-play'), stopBtn=$('#player-stop'), signal=$('#player-signal');
+  const sourceBtns=$$('.source');
+  const titles=new Map(sourceBtns.map(b=>[b.dataset.video,b.dataset.title]));
+  const needles=$$('.vu-needle');
+  const yt={status:'idle',video:null,player:null,api:false,loading:null};
+  let levels=[0,0], phase=0, last=0, frameId=0, playerVisible=false;
+  const playerAllowed=()=>motionAllowed()&&!document.hidden&&playerVisible;
+  function programmeLevel(t,ch){
+    const beat=Math.pow(Math.max(0,Math.sin(t*4.4+ch*.5)),6);
+    const phrase=.5+.5*Math.sin(t*.55+ch*.9);
+    const chop=.5+.5*Math.sin(t*11.3+ch*2.2);
+    return clamp(.16+.5*phrase*beat+.12*chop,.02,1);
   }
-  updateDemo=()=>{
-    const d=demo(.82);level=d.level;reduction=d.gr;paint();
-    $('#demo-settings').textContent=`Input ${Math.round(state.input)}% · Attack ${format('attack',state.attack)} · Release ${format('release',state.release)} · Output ${Math.round(state.output)}% · Ratio ${state.ratio}:1`;
-  };
-  updateDemo();
-  function frame(t){
+  function paintMeters(){
+    needles.forEach((n,i)=>n.setAttribute('transform',`rotate(${-48+levels[i]*(i?94:100)} 100 100)`));
+    playerEl.dataset.levelL=levels[0].toFixed(4);
+    playerEl.dataset.levelR=levels[1].toFixed(4);
+    const peak=Math.max(levels[0],levels[1]);
+    ladders.forEach(l=>[...l.children].forEach((b,i)=>b.classList.toggle('on',i<Math.round(peak*12))));
+  }
+  function meterFrame(t){
     frameId=0;
-    if(!motionAllowed()||document.hidden||!visibleUnits.size)return;
+    if(!playerAllowed())return;
     const dt=Math.min(.05,(t-last)/1000||.016);last=t;phase+=dt;
-    const d=demo(.45+.5*Math.pow(Math.max(0,Math.sin(phase*4.4)),4));
-    const tau=responseSeconds(d.level>level);
-    const alpha=1-Math.exp(-dt/tau);level+=(d.level-level)*alpha;reduction+=(d.gr-reduction)*alpha;paint();
-    frameId=requestAnimationFrame(frame);
+    const playing=yt.status==='playing';
+    [0,1].forEach(i=>{
+      const want=playing?programmeLevel(phase,i):0;
+      const tau=want>levels[i]?.11:.45;
+      levels[i]+=(want-levels[i])*(1-Math.exp(-dt/tau));
+    });
+    paintMeters();
+    frameId=requestAnimationFrame(meterFrame);
   }
-  function syncFrames(){cancelAnimationFrame(frameId);frameId=0;last=performance.now();if(motionAllowed()&&!document.hidden&&visibleUnits.size)frameId=requestAnimationFrame(frame);root.dataset.demoRunning=String(!!frameId);}
-  const meterObserver=new IntersectionObserver(entries=>{entries.forEach(e=>e.isIntersecting?visibleUnits.add(e.target):visibleUnits.delete(e.target));syncFrames();});
-  $$('#optical, #dynamics').forEach(e=>meterObserver.observe(e));
+  function syncMeter(){
+    cancelAnimationFrame(frameId);frameId=0;last=performance.now();
+    if(playerAllowed())frameId=requestAnimationFrame(meterFrame);
+    else { levels=[0,0]; paintMeters(); }
+    root.dataset.meterRunning=String(!!frameId);
+  }
+  function setStatus(text){ statusEl.textContent=text; }
+  function showIdle(){ screenIdle.hidden=false; screenFrame.hidden=true; }
+  function showScreen(){ screenIdle.hidden=true; screenFrame.hidden=false; }
+  function syncTransport(){
+    const playing=yt.status==='playing';
+    playBtn.setAttribute('aria-pressed',String(playing));
+    playBtn.textContent=playing?'Pause':'Play';
+    playBtn.disabled=!yt.video;
+    stopBtn.disabled=!yt.video;
+    signal.classList.toggle('jewel--on',playing);
+    nowSource.textContent=yt.video?(titles.get(yt.video)||yt.video):'no source';
+  }
+  function onState(e){
+    const s=e.data;
+    if(yt.stopping&&s===5){ yt.stopping=false; yt.status='idle'; showIdle(); syncTransport(); syncMeter(); return; }
+    yt.status=s===1?'playing':s===2?'paused':s===3?'buffering':s===0?'ended':s===5?'cued':'idle';
+    const title=titles.get(yt.video)||'source';
+    if(yt.status==='ended')showIdle();
+    syncTransport();syncMeter();
+  }
+  function onPlayerError(){
+    yt.status='error';
+    const id=yt.video||'RE-oPaanCas';
+    statusEl.innerHTML=`This video couldn’t play here — <a href="https://www.youtube.com/watch?v=${id}">watch it on YouTube</a>.`;
+    showIdle();syncTransport();syncMeter();
+  }
+  function loadApi(){
+    if(yt.api)return Promise.resolve();
+    if(yt.loading)return yt.loading;
+    yt.loading=new Promise(resolve=>{
+      window.onYouTubeIframeAPIReady=()=>{yt.api=true;resolve();};
+      const s=document.createElement('script');
+      s.src='https://www.youtube.com/iframe_api';
+      s.onerror=()=>resolve();
+      document.head.append(s);
+      setTimeout(resolve,8000);
+    });
+    return yt.loading;
+  }
+  async function playVideo(id){
+    yt.video=id;yt.status='loading';yt.stopping=false;
+    sourceBtns.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.video===id)));
+    showScreen();syncTransport();syncMeter();
+    await loadApi();
+    if(!window.YT||!YT.Player){ yt.status='error'; setStatus('Couldn’t reach YouTube — check your connection and try again.'); syncTransport(); return; }
+    try{
+      if(!yt.player){
+        yt.player=new YT.Player(screenHolder,{
+          width:'100%',height:'100%',videoId:id,
+          playerVars:Object.assign({autoplay:1,rel:0,modestbranding:1,playsinline:1},location.protocol.startsWith('http')?{origin:location.origin}:{}),
+          events:{onStateChange:onState,onError:onPlayerError,onReady:()=>{yt.player.playVideo();}}
+        });
+      } else yt.player.loadVideoById(id);
+    }catch(err){ yt.status='error'; setStatus('Playback failed to start.'); syncTransport(); }
+    syncTransport();
+  }
+  playBtn.addEventListener('click',()=>{
+    if(!yt.video)return;
+    if(yt.status==='playing'){ yt.player?.pauseVideo(); return; }
+    if(yt.player&&(yt.status==='paused'||yt.status==='cued'))yt.player.playVideo();
+    else playVideo(yt.video);
+  });
+  stopBtn.addEventListener('click',()=>{
+    if(!yt.video)return;
+    yt.stopping=true;
+    yt.player?.stopVideo();
+    yt.status='idle';
+    showIdle();syncTransport();syncMeter();
+  });
+  sourceBtns.forEach(b=>b.addEventListener('click',()=>playVideo(b.dataset.video)));
+  new IntersectionObserver(entries=>{playerVisible=entries[0].isIntersecting;syncMeter();}).observe(playerEl);
+  syncTransport();paintMeters();
 
   /* One owner for ident state. The poster paints first; the loop (a 330 KB H.264 file, not the old 1.6 MB
      animated WebP) is fetched only after the page has loaded and only if motion is allowed. Pause shows the
      current frame; the poster stays for reduced-motion and no-JS visitors. */
   const identVideo=$('#ident'), identBtn=$('#ident-toggle'), identGlass=$('.crt-glass');
-  let identWanted=!reduced.matches, identVisible=true, identPlaying=null, identReady=false;
+  let identWanted=!reducedOn(), identVisible=true, identPlaying=null, identReady=false;
   function loadIdent(){ if(identReady) return; identReady=true; identVideo.preload='auto'; identVideo.load(); }
   function syncIdent(){
     const playing=identWanted&&motionAllowed()&&!document.hidden&&identVisible;
@@ -108,17 +182,13 @@
       else identVideo.pause();
       identPlaying=playing;
     }
-    identBtn.setAttribute('aria-pressed',String(playing));identBtn.textContent=playing?'Pause ident':'Play ident';
+    identBtn.setAttribute('aria-pressed',String(playing));identBtn.setAttribute('aria-label',playing?'Pause ident':'Play ident');
     identGlass.classList.toggle('is-paused',!playing);
   }
-  identBtn.addEventListener('click',()=>{identWanted=!identPlaying;if(identWanted&&!reduced.matches&&paused){paused=false;syncMotion();}syncIdent();});
+  identBtn.addEventListener('click',()=>{identWanted=!identPlaying;syncIdent();});
   new IntersectionObserver(entries=>{identVisible=entries[0].isIntersecting;syncIdent();}).observe($('.crt'));
   // Never compete with fonts, CSS and the first paint: the loop waits for the load event (or 1.5 s, whichever is first).
   { let kicked=false; const kick=()=>{ if(kicked) return; kicked=true; syncIdent(); }; if(identWanted&&motionAllowed()){ addEventListener('load',kick,{once:true}); setTimeout(kick,1500); } else kick(); }
-  $('#lamp-level').addEventListener('input',e=>root.style.setProperty('--lamp',(0.15+e.target.value/100*.85).toFixed(3)));
-  $('#scan-speed').addEventListener('input',e=>root.style.setProperty('--crt-period',(3.2/(.4+e.target.value/100*1.6)).toFixed(2)+'s'));
-  root.style.setProperty('--lamp',(.15+.7*.85).toFixed(3));
-  root.style.setProperty('--crt-period',(3.2/(.4+.5*1.6)).toFixed(2)+'s');
 
   /* Native scrolling: a paired assembly moment, then restrained plate seating. */
   let scrollContext=null;
@@ -127,76 +197,47 @@
     scrollContext?.revert();scrollContext=null;
     if(!motionAllowed()||!window.gsap||!window.ScrollTrigger)return;
     scrollContext=gsap.context(()=>{
-      gsap.fromTo('#optical',{y:32,scale:.975},{y:0,scale:1,ease:'none',scrollTrigger:{trigger:'#optical',start:'top bottom',end:'top 55%',scrub:true}});
-      gsap.fromTo('#dynamics',{y:22,scale:.985},{y:0,scale:1,ease:'none',scrollTrigger:{trigger:'#dynamics',start:'top bottom',end:'top 65%',scrub:true}});
-      gsap.fromTo('#patch .jackfield',{y:14},{y:0,ease:'none',scrollTrigger:{trigger:'#patch',start:'top bottom',end:'top 40%',scrub:true,onUpdate:()=>draw()}});
+      gsap.fromTo('#player',{y:26,scale:.982},{y:0,scale:1,ease:'none',scrollTrigger:{trigger:'#player',start:'top bottom',end:'top 55%',scrub:true}});
     });
     ScrollTrigger.refresh();
   }
   function syncMotion({deferIdent=false}={}){
     root.classList.toggle('motion-paused',!motionAllowed());
-    $('#motion-toggle').setAttribute('aria-pressed',String(paused||reduced.matches));
-    $('#motion-toggle').textContent=reduced.matches?'Reduced motion on':paused?'Resume motion':'Pause motion';
-    $('#motion-toggle').disabled=reduced.matches;
-    syncFrames();if(!deferIdent)syncIdent();syncScroll();
+    syncMeter();if(!deferIdent)syncIdent();syncScroll();
     dispatchEvent(new CustomEvent('rack:motion',{detail:{paused:!motionAllowed()}}));
   }
-  $('#motion-toggle').addEventListener('click',()=>{paused=!paused;syncMotion();});
-  reduced.addEventListener('change',()=>{if(reduced.matches)identWanted=false;syncMotion();});
-  document.addEventListener('visibilitychange',()=>{syncFrames();syncIdent();});
-
-  /* A patch is a booking brief, not a decorative signal path. */
-  const field=$('.jackfield'), svg=$('.cables'), jacks=$$('.jack');
-  const input=$('#route-input'), output=$('#route-output'), need=$('#need');
-  const room=$('[data-jack="room"]');
-  let armed=null, dragged=false;
-  const routeLabels={'in-tracking':'Tracking','in-mixing':'Mixing','in-finishing':'Finishing','out-record':'A record','out-release':'Release','out-video':'Vinyl / video'};
-  const center=el=>{const r=el.getBoundingClientRect(),f=field.getBoundingClientRect();return{x:r.left-f.left+r.width/2,y:r.top-f.top+r.height/2};};
-  const bez=(a,b)=>{const sag=38+Math.hypot(b.x-a.x,b.y-a.y)*.18;return`M${a.x} ${a.y} C${a.x} ${a.y+sag}, ${b.x} ${b.y+sag}, ${b.x} ${b.y}`;};
-  function draw(){
-    $$('.cables path:not(.preview)').forEach(p=>p.remove());
-    [input.value,output.value].filter(Boolean).forEach((key,i)=>{const p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d',bez(center($(`[data-jack="${key}"]`)),center(room)));p.setAttribute('class','c'+i);svg.append(p);});
-  }
-  function updateRoute(){
-    const i=input.value,o=output.value;
-    const summary=i||o?`${routeLabels[i]||'Service undecided'} → John → ${routeLabels[o]||'Outcome undecided'}`:'';
-    if(i)need.value=routeLabels[i];
-    $('#booking-route').textContent=summary||'No patch route selected.';$('#booking-route').classList.toggle('is-empty',!summary);
-    $('#booking-route-field').value=summary;
-    $('#route-status').textContent=summary?(summary+(i&&o?' · Ready for your brief.':' · You can fill in the rest with John.')):'Choose a service and an outcome, or go straight to booking.';
-    $('#route-lamp').classList.toggle('jewel--on',!!(i&&o));
-    jacks.forEach(j=>{const selected=[i,o,...(i||o?['room']:[])].includes(j.dataset.jack);j.classList.toggle('patched',selected);j.setAttribute('aria-pressed',String(selected));});
-    $$('.service').forEach(s=>s.classList.toggle('is-on',s.dataset.service===i));
-    $('#services').classList.toggle('has-route',!!i);
-    draw();window.ScrollTrigger?.refresh();
-  }
-  [input,output].forEach(s=>s.addEventListener('change',updateRoute));
-  $('#clear-route').addEventListener('click',()=>{input.value='';output.value='';need.value='Not sure yet';armed?.classList.remove('armed');armed=null;updateRoute();});
-  $('#use-route').addEventListener('click',()=>{updateRoute();$('#book').scrollIntoView({behavior:motionAllowed()?'smooth':'instant',block:'start'});$('#name').focus({preventScroll:true});});
-  // Editing service in the form stays authoritative and keeps its route summary consistent.
-  need.addEventListener('change',()=>{input.value=Object.keys(routeLabels).find(k=>k.startsWith('in-')&&routeLabels[k]===need.value)||'';updateRoute();});
-  function connect(a,b){
-    const keys=[a.dataset.jack,b.dataset.jack];
-    const key=keys.find(k=>k!=='room');
-    if(!keys.includes('room')||a===b){$('#route-status').textContent='Connect an input to John, or John to an output. The selectors also work.';return;}
-    (key.startsWith('in-')?input:output).value=key;updateRoute();
-  }
-  jacks.forEach(j=>{
-    j.addEventListener('pointerdown',e=>{
-      if(e.button!==0)return;dragged=false;const start={x:e.clientX,y:e.clientY};
-      const preview=document.createElementNS('http://www.w3.org/2000/svg','path');preview.setAttribute('class','preview');svg.append(preview);
-      const move=ev=>{if(Math.hypot(ev.clientX-start.x,ev.clientY-start.y)>6)dragged=true;const f=field.getBoundingClientRect();preview.setAttribute('d',bez(center(j),{x:ev.clientX-f.left,y:ev.clientY-f.top}));};
-      const finish=ev=>{window.removeEventListener('pointermove',move);window.removeEventListener('pointerup',finish);window.removeEventListener('pointercancel',finish);preview.remove();if(ev.type==='pointercancel'){dragged=false;return;}if(!dragged)return;const target=document.elementFromPoint(ev.clientX,ev.clientY)?.closest('.jack');if(target)connect(j,target);armed?.classList.remove('armed');armed=null;};
-      window.addEventListener('pointermove',move);window.addEventListener('pointerup',finish);window.addEventListener('pointercancel',finish);
-    });
-    j.addEventListener('click',()=>{if(dragged){dragged=false;return;}if(armed&&armed!==j){connect(armed,j);armed.classList.remove('armed');armed=null;}else if(armed===j){j.classList.remove('armed');armed=null;}else{armed=j;j.classList.add('armed');$('#route-status').textContent='Jack selected. Now choose John or the other end of the route.';}});
-    j.addEventListener('keydown',e=>{if(e.key==='Escape'){armed?.classList.remove('armed');armed=null;updateRoute();}});
-  });
-  addEventListener('resize',draw);
-  updateRoute();
+  reduced.addEventListener('change',()=>{if(reducedOn())identWanted=false;syncMotion();});
+  document.addEventListener('visibilitychange',()=>{syncMeter();syncIdent();});
 
   const form=$('.book-form');
-  form.addEventListener('submit',e=>{e.preventDefault();if(!form.reportValidity())return;$('#form-note').textContent='Not sent — this form isn’t connected yet. Your text and route are still here; John’s direct contact details will replace this note once he supplies them.';$('#form-note').setAttribute('role','status');});
+  /* Booking delivery. GitHub Pages is static, so the form posts to a serverless
+     form backend that emails John. Fill endpoint + accessKey to switch it on;
+     until then the honest "nothing is sent" note stays and nothing leaves the page.
+     Web3Forms: endpoint https://api.web3forms.com/submit, accessKey from web3forms.com.
+     Formspree:  endpoint https://formspree.io/f/<your-form-id>, accessKey '' (id is in the URL). */
+  const BOOK_FORM = { endpoint:'', accessKey:'' };
+  const bookNote = $('#form-note');
+  const bookIdle = 'This form has no server behind it, so nothing is sent — call or email John directly and he’ll reply.';
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    if(!form.reportValidity())return;
+    if(!BOOK_FORM.endpoint){ bookNote.textContent=bookIdle; bookNote.setAttribute('role','status'); return; }
+    // Honeypot: both fields must stay empty. Bots fill them, people never see them.
+    if([...form.querySelectorAll('.hp')].some(i=>i.value.trim())){ bookNote.textContent=bookIdle; return; }
+    const data=new FormData(form);
+    if(BOOK_FORM.accessKey)data.set('access_key',BOOK_FORM.accessKey);
+    data.set('_subject',`Booking enquiry from ${$('#name').value||'the site'}`);
+    data.set('_replyto',$('#email').value);
+    bookNote.textContent='Sending…';bookNote.setAttribute('role','status');
+    try{
+      const res=await fetch(BOOK_FORM.endpoint,{method:'POST',body:data,headers:{'Accept':'application/json'}});
+      if(!res.ok)throw new Error(res.status);
+      bookNote.textContent='Sent — John will reply directly. If you don’t hear back, call 816-694-6288.';
+      form.reset();
+    }catch(err){
+      bookNote.textContent='That didn’t send. Call or email John directly — 816-694-6288 · hillseastrecording@gmail.com.';
+    }
+  });
   const hidden=$('#hidden-rack');let presses=[];
   $('#reset').addEventListener('click',()=>{
     const now=performance.now();presses=presses.filter(t=>now-t<2000).concat(now);
@@ -204,5 +245,5 @@
   });
   new MutationObserver(()=>{if(!hidden.hidden&&!hidden.childElementCount){hidden.hidden=true;hidden.classList.remove('is-in');window.ScrollTrigger?.refresh();}}).observe(hidden,{childList:true});
   syncMotion({deferIdent:true});
-  document.fonts.ready.then(()=>{draw();window.ScrollTrigger?.refresh();});
+  document.fonts.ready.then(()=>{window.ScrollTrigger?.refresh();});
 })();

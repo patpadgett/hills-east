@@ -1,0 +1,358 @@
+[
+  {
+    "width": 1440,
+    "unit": {
+      "present": true,
+      "bands": 10,
+      "segments": 120,
+      "navMusic": "Music",
+      "empty": true,
+      "playDisabled": true,
+      "prevDisabled": true,
+      "nextDisabled": true,
+      "track": "Playlist empty",
+      "lit": 0,
+      "api": "object"
+    },
+    "lowStart": {
+      "index": 0,
+      "playing": true,
+      "count": 1,
+      "volume": 0.8,
+      "duration": 6,
+      "currentTime": 0.896,
+      "bands": [
+        1,
+        0.7910838539952153,
+        0.3461247274891755,
+        0.16461550319936147,
+        0.0071269270364296925,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "low": {
+      "state": {
+        "index": 0,
+        "playing": true,
+        "count": 1,
+        "volume": 0.8,
+        "duration": 6,
+        "currentTime": 0.896
+      },
+      "bands": [
+        1,
+        0.7910838539952153,
+        0.3461247274891755,
+        0.16461550319936147,
+        0.0071269270364296925,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "lit": 27,
+      "width": "13.64%",
+      "track": "QA low tone",
+      "on": 1,
+      "aria": "true"
+    },
+    "lowLater": {
+      "bands": [
+        1,
+        0.7937214763186912,
+        0.3279930154465507,
+        0.138918739139966,
+        0.005552923888433681,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "lit": 28
+    },
+    "high": {
+      "bands": [
+        4.09477868624274e-10,
+        3.244465182023559e-10,
+        1.4028997407185549e-10,
+        0.13318717511305075,
+        0.6247221030576032,
+        0.46541684671925965,
+        0.005626736004262553,
+        0,
+        0,
+        0
+      ],
+      "lit": 15,
+      "index": 1,
+      "nextDisabled": true
+    },
+    "paused": {
+      "playing": false,
+      "bands": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "lit": 0
+    },
+    "volEnd": {
+      "v": 1,
+      "aria": "100",
+      "out": "100%"
+    },
+    "volHome": {
+      "v": 0,
+      "aria": "0"
+    },
+    "reduced": {
+      "bands": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "lit": 0
+    },
+    "restored": {
+      "bands": [
+        0,
+        0,
+        0,
+        0.13268833965070786,
+        0.6248450415196303,
+        0.4653595561775194,
+        0.007167294498722015,
+        0,
+        0,
+        0
+      ],
+      "lit": 15
+    },
+    "overflow": {
+      "scroll": 1440,
+      "client": 1440,
+      "offenders": []
+    },
+    "errors": [],
+    "peaks": {
+      "lowPeak": 0,
+      "highPeak": 4
+    },
+    "assertions": {
+      "unit": true,
+      "empty": true,
+      "playing": true,
+      "realAnalyzer": true,
+      "bandSeparation": true,
+      "progress": true,
+      "paused": true,
+      "volume": true,
+      "reduced": true,
+      "restored": true,
+      "overflow": true,
+      "errors": true
+    }
+  },
+  {
+    "width": 390,
+    "unit": {
+      "present": true,
+      "bands": 10,
+      "segments": 120,
+      "navMusic": "Music",
+      "empty": true,
+      "playDisabled": true,
+      "prevDisabled": true,
+      "nextDisabled": true,
+      "track": "Playlist empty",
+      "lit": 0,
+      "api": "object"
+    },
+    "lowStart": {
+      "index": 0,
+      "playing": true,
+      "count": 1,
+      "volume": 0.8,
+      "duration": 6,
+      "currentTime": 0.890073,
+      "bands": [
+        1,
+        0.7914827081388467,
+        0.3487051439874291,
+        0.16865303136246018,
+        0.008345828934388752,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "low": {
+      "state": {
+        "index": 0,
+        "playing": true,
+        "count": 1,
+        "volume": 0.8,
+        "duration": 6,
+        "currentTime": 0.893604
+      },
+      "bands": [
+        1,
+        0.7914827081388467,
+        0.3487051439874291,
+        0.16865303136246018,
+        0.008345828934388752,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "lit": 27,
+      "width": "13.14%",
+      "track": "QA low tone",
+      "on": 1,
+      "aria": "true"
+    },
+    "lowLater": {
+      "bands": [
+        1,
+        0.7938132003980163,
+        0.32670205610837283,
+        0.13713623797651975,
+        0.004963352127069061,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "lit": 28
+    },
+    "high": {
+      "bands": [
+        1.9431854151138649e-10,
+        1.54000728722097e-10,
+        6.476786848391909e-11,
+        0.1351657543932901,
+        0.6248536107479461,
+        0.46542697664023563,
+        0.006239781956594631,
+        0,
+        0,
+        0
+      ],
+      "lit": 15,
+      "index": 1,
+      "nextDisabled": true
+    },
+    "paused": {
+      "playing": false,
+      "bands": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "lit": 0
+    },
+    "volEnd": {
+      "v": 1,
+      "aria": "100",
+      "out": "100%"
+    },
+    "volHome": {
+      "v": 0,
+      "aria": "0"
+    },
+    "reduced": {
+      "bands": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "lit": 0
+    },
+    "restored": {
+      "bands": [
+        0,
+        0,
+        0,
+        0.1319655753254032,
+        0.6246457242812744,
+        0.4655938489825698,
+        0.00695400874278572,
+        0,
+        0,
+        0
+      ],
+      "lit": 15
+    },
+    "overflow": {
+      "scroll": 390,
+      "client": 390,
+      "offenders": []
+    },
+    "errors": [],
+    "peaks": {
+      "lowPeak": 0,
+      "highPeak": 4
+    },
+    "assertions": {
+      "unit": true,
+      "empty": true,
+      "playing": true,
+      "realAnalyzer": true,
+      "bandSeparation": true,
+      "progress": true,
+      "paused": true,
+      "volume": true,
+      "reduced": true,
+      "restored": true,
+      "overflow": true,
+      "errors": true
+    }
+  },
+  {
+    "noJS": {
+      "unit": true,
+      "track": "Playlist empty",
+      "bands": 0,
+      "transport": true
+    }
+  }
+]

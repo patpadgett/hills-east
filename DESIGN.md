@@ -1,6 +1,6 @@
 ---
 name: Hills East Recording — The Rack
-description: A playable 19-inch equipment rack with brushed-black faceplates, champagne booking hardware, silkscreen legends, and handwritten patch labels.
+description: A 19-inch equipment rack with brushed-black faceplates, a champagne booking plate, a YouTube playback unit with a stereo meter bridge, and a hidden instrument.
 colors:
   room: "#08080a"
   rail: "#2a2b2f"
@@ -18,25 +18,7 @@ colors:
   red-glow: "rgba(232,50,42,.55)"
   amber: "#ffb43c"
   green: "#62e07a"
-  tape: "#e7dcbf"
-  tape-ink: "#1a1710"
-  field: "#f3eee0"
   champ-label: "#3f3828"
-  silver-hi: "#f1f1eb"
-  silver: "#c9cbc7"
-  silver-2: "#b9bcb9"
-  silver-lo: "#959c9c"
-  silver-ink: "#202324"
-  silver-rule: "#727876"
-  silver-brand: "#94281f"
-  black-hi: "#292b2d"
-  black: "#111315"
-  black-2: "#101214"
-  black-lo: "#050606"
-  screenprint: "#e2e1d7"
-  led-amber: "#ffcb55"
-  led-off: "#47251c"
-  readout-amber: "#efcf83"
 typography:
   display:
     fontFamily: "Big Shoulders, Impact, Arial Narrow, sans-serif"
@@ -76,12 +58,6 @@ typography:
     fontSize: ".82rem"
     fontWeight: 500
     lineHeight: 1.2
-  tape:
-    fontFamily: "Caveat, Comic Sans MS, cursive"
-    fontSize: "1.05rem"
-    fontWeight: 700
-    lineHeight: 1
-    note: "static 700 instance, Basic Latin subset (fonts/caveat-700-latin.woff2, 41 KB)"
 rounded:
   unit: "2px"
   control: "3px"
@@ -104,7 +80,7 @@ components:
     rounded: "{rounded.well}"
     padding: ".95rem 1.4rem .9rem 1.1rem"
   field:
-    backgroundColor: "{colors.field}"
+    backgroundColor: "#f3eee0"
     textColor: "{colors.champ-ink}"
     rounded: "{rounded.control}"
     padding: ".7rem .8rem"
@@ -112,87 +88,90 @@ components:
     rounded: "{rounded.circle}"
     width: "54px"
     height: "54px"
-  jack:
-    rounded: "{rounded.circle}"
-    width: "44px"
-    height: "44px"
   jewel:
     rounded: "{rounded.circle}"
     width: "14px"
     height: "14px"
 ---
 
-# Hills East Recording — revised rack
+# Hills East Recording — rackmount edition
 
-As-shipped reference for the rackmount revision (centered monitor, silver leveling amplifier, black dynamics lab, patch-to-booking) plus the hidden MPC-inspired pad sampler. Frontmatter tokens are the live `:root` values; the sections below record actual behaviour, not intent.
+As-shipped reference for the rack: centered monitor, YouTube playback unit with a stereo meter bridge, room, stage selector, champagne booking, power conditioner, plus the hidden MPC-inspired pad sampler. Frontmatter tokens are the live `:root` values; the sections below record actual behaviour, not intent.
+
 ## Direction and invariants
 
-Preserve the 19-inch rack: continuous perforated rails, bolted ears, black brushed metal, champagne booking plate, red jewels, and the original content. Add recognizable hardware-inspired visual studies without suggesting studio ownership or endorsement. No actual compressor emulation is present.
-Fonts remain local Big Shoulders (equipment/headlines), Michroma (silkscreen), Archivo (body), Caveat (patch tape). Existing root tokens remain: room `#08080a`, plate `#16171a`, plate-2 `#1d1e22`, silk `#e9e7e0`, secondary silk `#a9a8a3`, champagne `#c9bfa6`, dark champagne ink `#17130c`, red `#e8322a`, amber `#ffb43c`, green `#62e07a`. Upper-left sheen, inset wells, metal knob caps and shadows describe hardware. Rack width remains capped at 1240px; unit classes are minimum heights, not rigid real-world U dimensions.
+Preserve the 19-inch rack: continuous perforated rails, bolted ears, black brushed metal, champagne booking plate, red jewels, and the original content. Add recognizable hardware-inspired visual studies without suggesting studio ownership or endorsement. No audio is processed by the page's public controls, and no simulated meter is described as a measurement.
+Fonts remain local Big Shoulders (equipment/headlines), Michroma (silkscreen), Archivo (body). Existing root tokens remain: room `#08080a`, plate `#16171a`, plate-2 `#1d1e22`, silk `#e9e7e0`, secondary silk `#a9a8a3`, champagne `#c9bfa6`, dark champagne ink `#17130c`, red `#e8322a`, amber `#ffb43c`, green `#62e07a`. Upper-left sheen, inset wells, metal knob caps and shadows describe hardware. Rack width remains capped at 1240px; unit classes are minimum heights, not rigid real-world U dimensions.
 
 ## Composition
 
-Order: header; centered monitor/hero; silver leveling amplifier; black dynamics lab; session patchbay; room; stage selector; champagne booking; power conditioner; hidden instrument.
+Order: header; centered monitor/hero; playback; room; stage selector; champagne booking; power conditioner; hidden instrument.
 
-The hero is a two-column 4U unit above 900px: monitor left (`minmax(340px,50%)`, `.crt` at `min(100%, 62vh)` capped at 680px), copy right (`max-width: 34rem`, left-aligned, optically centred on the screen rather than on screen + caption row via `padding-bottom: 3.4rem`). The unit's `min-height` fills the first viewport minus the header so the headline, lede and Book switch are always inside the fold on desktop (verified 1440×900, 1280×720, 1024×768). Below 900px it stacks: centred monitor, then centred copy. The h1 keeps its `<br>` after "Plug in." (two lines at every width). Image fit is `contain`, never cropped.
+The hero is a two-column 4U unit above 900px: monitor left (`minmax(340px,50%)`, `.crt` at `min(100%, 62vh)` capped at 680px), copy right (`max-width: 34rem`, left-aligned, optically centred on the screen via `padding-bottom: 3.4rem`). Below 900px it stacks: centred monitor, then centred copy. The h1 keeps its `<br>` after "Plug in." Image fit is `contain`, never cropped.
 
-The monitor is a muted, looping, `playsinline` H.264 `<video>` (`assets/hills-east-ident.mp4`, 560², 328 KB) with a WebP poster (`assets/hills-east-poster.webp`, 36 KB) and `preload="none"`. `script.js` owns playback: the loop is fetched only after `load` (or 1.5 s), only when motion is allowed, the tab is visible and the monitor intersects the viewport. Reduced-motion and no-JS visitors see the poster only. The old 1.6 MB animated WebP and 6.8 MB GIF are gone.
+The monitor is a muted, looping, `playsinline` H.264 `<video>` (`assets/hills-east-ident.mp4`, 560²) with a WebP poster and `preload="none"`. `script.js` owns playback: the loop is fetched only after `load` (or 1.5 s), only when motion is allowed, the tab is visible and the monitor intersects the viewport. Reduced-motion and no-JS visitors see the poster only.
 
-Caption row: `MONITOR · STUDIO IDENT` left, `Play/Pause ident` right, one line, flush with the bezel. The global motion toggle (`Pause motion / Resume motion / Reduced motion on`) sits on the 1U header beside the nav; the header is one row down to 1120px (below which the location legend is dropped, since the location repeats in the lede and footer).
-Ident uses local animated WebP with GIF fallback. Pause replaces it with the existing poster, not a frozen animation frame. Offscreen/hidden document also swaps to the poster. Caption provides ident pause; the separate motion control governs all visual loops and scroll effects.
-## Silver leveling amplifier
+Caption row: `MONITOR · STUDIO IDENT` left, an icon-only Play/Pause button right (`.iconbtn`; the `aria-label` toggles between "Play ident" and "Pause ident"). The header carries the studio phone as a 44px chip (`tel:`) beside the brand; the location legend drops below 1120px and the chip wraps onto its own row below 600px. The manual motion toggle is gone.
 
-LA-2A-inspired, not a replica: cool brushed plate (`silver-hi → silver → silver-2 → silver-lo` tokens), `silver-ink` lettering, red italic Hills East upper-left wordmark, restrained Studio Leveling Amplifier title, central amber beveled VU, large black Gain left and Peak Reduction right. The double-rule base suggests a hardware seam. No decorative fake switches were added.
+## Playback unit
 
-Desktop face grid is `1fr minmax(180px,280px) 1fr` (areas `gain meter peak`); knobs 94px. Mobile restacks to `meter meter / gain peak`: full-width VU on top, two 72px knobs below with their 44px −/+ pairs. Knob legends reserve a 2.6em two-line height so `Peak reduction` wrapping never misaligns the two columns. Readouts (`62%`, `110 ms`) use the body face at `.82rem` 500 with tabular numerals — Michroma's `%` glyph reads as `º/o`. One central VU keeps the recognizable composition; this is not stereo audio metering. SVG needle transform is owned by JS, not overridden in CSS.
+A 4U unit: brand row (italic Hills East wordmark, `PLAYBACK` title, `VIDEO · STEREO METER BRIDGE` legend), then a two-column face — 16:9 screen left, meter bridge right — then a source row.
 
-## Black dynamics lab
+Screen: a 16:9 well inside a 12px bezel with the same glass sheen and scanline overlay as the monitor (`--crt-period` is a fixed default). Two layers fill it: `.screen-idle` (radial dark field, 78px metal play glyph, `SELECT A SOURCE TO PLAY`) and `.screen-frame` > `.screen-target`, the YouTube IFrame API target. The API replaces the target with the iframe, so the wrapper — not the target — carries `hidden`.
 
-Distressor-inspired black plate (`black-hi → black → black-2 → black-lo`, `screenprint` frame, `led-amber`/`led-off`, `readout-amber`), rounded 2px off-white screenprint border, top reduction LED scale 1/2/3/4/6/8/10/12, silver four-knob Input/Attack/Release/Output row, six ratio buttons (1:1 through 20:1), numerical readout, brief instructions. Silver knobs are 72px desktop, 62px mobile. Four-column desktop becomes an ordered 2×2 mobile grid; the ratio bank wraps. The optics and typography are retained without reproducing manufacturer branding.
+Sources: two `.pushbtn` channel buttons, `CH 1 · INTERNAL` and `CH 2 · FADE AWAY`, each with `aria-pressed` and no sub-line. Video IDs `RE-oPaanCas` and `ZrAWnT-ecWM` are the only YouTube references; titles live in `data-title` and feed the now-playing readout.
 
-All public processing names refer to the **meter demo only**. A normalized periodic pulse feeds a simple threshold/ratio display formula. Input scales its source; Ratio reduces the amount above 0.22; Output and Gain scale the remaining display level; Peak Reduction attenuates it. The reduction readout uses demo dB, not calibrated audio dB. Attack spans 10–410ms; Release 80–1280ms and controls exponential visual response. Static/reduced states still respond to settings, with settings text describing time values. Knob controls are vertical ARIA sliders with formatted values, visible readouts and −/+ alternatives. Wheel changes only focused knobs so ordinary wheel scrolling is not trapped.
-The meter demo does not consume `hiddenrack:audio`; hidden audio is independently playable and its levels API remains available.
-## Patch → booking
+Transport: Play/Pause and Stop pushbuttons in the caption row, plus a `NOW PLAYING · …` legend and a Signal jewel. Play/Pause and Stop are disabled until a source exists. Selecting a source injects `https://www.youtube.com/iframe_api` once, creates the player (or calls `loadVideoById` on the second and later selections) and plays. `onStateChange` owns the readout and the jewel; `onError` returns to the idle screen with a watch-on-YouTube link. Stop calls `stopVideo`, returns to idle and suppresses the CUED state that YouTube reports afterwards. End of video returns to idle.
 
-Two native selects always remain visible: service input and outcome output. Optional jacks accept input↔John and John↔output, by drag or two activations (tap/click/Enter/Space). Escape cancels an armed jack; pointercancel rolls back the cable preview. One connection per side. SVG cable curves draw behind socket labels.
+Meter bridge: two `.vu` meters (L/R) reusing the shared SVG scale and tick generator. `script.js` runs a rAF loop only while the unit intersects the viewport, the document is visible and motion is allowed. While YouTube reports playing, a deterministic stereo programme envelope (slow phrase × pulse + fast detail, decorrelated per channel) drives the needles with ~110 ms rise / ~450 ms fall ballistics; otherwise the target is rest. The loop writes `#player[data-level-l]`/`[data-level-r]`, and the room and power ladders light from the same peak level. **The needles are a playback demo.** The iframe's audio is cross-origin and is never analysed. The unit carries no explanatory note; a hidden status line appears only to report a playback error.
 
-No default route is silently chosen. A partial or full choice updates service copy, booking need when an input exists, the separate visible booking summary and hidden `session_route` value. Complete paths light the Signal jewel. Use this route always allows continuing, including partial/undecided paths, scrolls natively to booking and focuses Your name without a second scroll. Clear route removes the route and sets need to Not sure yet. Editing the booking need synchronizes its input route. None of these operations edits the user's message, name, email or project.
+Reduced motion stops the loop and drops the needles to rest; the video itself keeps playing because playback is an explicit user action. No-JS visitors get a `<noscript>` with both YouTube links.
 
-Booking remains champagne with native fields. A valid submit is intercepted and explicitly says Not sent because no endpoint is configured; text remains in memory. No fake success, queue or persistence. Original contact marketing copy is preserved with the existing disconnected-form warning.
+## Booking form delivery
+
+GitHub Pages serves static files only — no server-side code — so the form posts to a serverless form backend that emails John. `script.js` holds `BOOK_FORM = { endpoint, accessKey }`; both are empty in the shipped tree, so the submit handler falls through to the honest "nothing is sent" message and no request leaves the page. Setting the two values activates it: the handler POSTs `FormData` (with `access_key`, `_subject`, `_replyto` added), shows "Sending…", then either "Sent — John will reply directly…" plus a form reset, or the call/email fallback on a non-2xx response.
+
+A `.hp-wrap` pair of honeypot inputs (`botcheck`, `_gotcha`) sits off-screen; if either is filled the handler drops the submission without posting. `action` stays `#` until the endpoint is configured, so the no-JS path never posts into the void. Web3Forms (250 free submissions/month) and Formspree (50) both accept this shape. The tradeoff is that message content passes through a third party.
+
+## Parked: playlist unit
+
+A 4U local-audio playlist with a live 10-band FFT spectrum (`<audio>` → `MediaElementSource` → `AnalyserNode` → gain → destination) was designed and verified, then removed until the MP3s arrive. Module, stylesheet, QA probes and the audio drop-folder instructions live in `../hills-east-playlist-unit/`; restoring is a copy-plus-markup job, and `script.js` already carries the generic knob hook it needs.
+
+## Room, stage selector, booking, power
+
+Room keeps its two-column 3U face and spec table, with the demo-level ladder now fed by the playback unit. The stage selector keeps the 3-position chicken-head knob (`Talk / Track / Finish`) driving the three How-it-works stages. Booking remains champagne with native fields and the disconnected-form honesty note; the patch-route field is gone. The power conditioner keeps the demo ladder and the RESET easter egg; its two unused sliders are gone.
 
 ## Motion and lifecycle
-Local GSAP/ScrollTrigger 3.13.0 with original license headers. One paired assembly moment: silver unit settles from y32/scale .975 to its natural geometry; black settles from y22/scale .985. Both scrub native viewport scroll with ease none. Patchfield seats from y14, redrawing cables during its scroll transform. Three triggers, no pinning, snapping, scroller proxy or scroll hijack. All content starts visible; missing GSAP simply disables these enhancements. Context reversion restores natural geometry before pausing or preference changes. Fonts-ready and route/layout changes refresh measurements.
-Pause all motion reverts scroll contexts, cancels meter rAF, pauses CSS animations, swaps ident poster and signals the hidden instrument's visual chase. Reduced-motion is honored on initial load and dynamically, disabling transitions/animations and native smooth-scroll as well. Reduced preference disables the main motion button rather than overriding the preference. The ident cannot be forced to animate while reduced preference is active.
 
-Meter frames run only with either dynamics unit intersecting the viewport, document visible and motion allowed. Decorative room/footer ladders retain the last demo value, rather than keeping a loop alive solely for their lights. Hidden sequencer visual frames run only during transport, onscreen, document-visible and motion-enabled; its offscreen visual queue is discarded. Audio stays a separate explicit PLAY/STOP interaction; document hiding stops transport and releases notes. POWER closes audio, cancels timers/frames and removes listeners.
+Local GSAP/ScrollTrigger 3.13.0 with original license headers. One restrained seating moment: the playback unit settles from y26/scale .982 to its natural geometry, scrubbed against native viewport scroll with ease none. No pinning, snapping, scroller proxy or scroll hijack. All content starts visible; missing GSAP disables the enhancement. Context reversion restores natural geometry before pausing or preference changes.
+
+Reduced motion reverts scroll contexts, cancels the meter rAF loop, pauses CSS animations and signals the hidden instrument. Reduced-motion is honored on initial load and dynamically; the live state is read with a fresh `matchMedia(...)` rather than a cached `MediaQueryList`, which can go stale under emulation. The meter loop runs only while the playback unit is onscreen, the document is visible and motion is allowed; room and power ladders retain the last level rather than keeping a loop alive for their lights. Hidden sequencer frames run only during transport, onscreen, document-visible and motion-enabled. Audio stays a separate explicit PLAY/STOP interaction.
 
 ## Progressive behavior and accessibility
 
-Original service/stage copy remains in HTML. Without JS every service and stage displays, hero and booking remain visible, and a noscript notice directs users to the booking fields. With JS the rotary stage selection and current service disclosure work as before. Touch-friendly visible alternatives accompany rotary controls and cables. Focus uses the existing amber outline, red on champagne. Tiny silkscreen is reserved for hardware labels; body explanations remain Archivo. Main nudge targets are 44px square after final QA.
+Original room/stage copy remains in HTML. Without JS every stage displays, the hero and booking remain visible, and the playback unit exposes both videos as plain links. With JS the stage selection and playback transport work as before. Touch-friendly visible alternatives accompany rotary controls. Focus uses the existing amber outline, red on champagne. Tiny silkscreen is reserved for hardware labels; body explanations remain Archivo. All nudge targets are 44px square, and the contact links (header phone chip, booking phone/email, footer phone) are 32–44px. The viewport declares `viewport-fit=cover` and the body carries `env(safe-area-inset-*)` padding, so notched phones keep the rails clear. Below 340px the spec table stacks and the unit ears tighten; below 300px unit headings, the phone chip and the LED ladder step down and the footer power strip wraps. The page has no horizontal overflow from 1440 down to 195 CSS px, including the 320px WCAG 1.4.10 reflow width. The stage knob is a vertical drag with `touch-action: none`, so dragging it moves the control rather than the page; `touch-qa.cjs` verifies that, both drag axes, `touchCancel` recovery, taps on the ident and source controls, and that ordinary copy still scrolls.
+
 ## Verification and references
-Canonical evidence: `.impeccable/review/revision-2-results.json` and matching 390/1440 hero, optical, dynamics, patch, booking and full-page screenshots. Both viewport suites passed all assertions. Node syntax checks passed. Two bounded rounds; no detector because the local Impeccable detector modules are known missing. PRODUCT.md was intentionally not repaired; its historical video/dummy-success wording does not describe this implementation.
 
-Visual references (not shipped assets):
-- https://help.uaudio.com/hc/article_attachments/20381267951252
-- https://help.uaudio.com/hc/article_attachments/24802645501332
+Canonical evidence: `.impeccable/review/player-55-results.json` and the matching 1440/390 screenshots, plus `revision-56-results.json` for the full-site regression and `touch-qa.cjs` for the synthesised-touch suite. Both suites passed every assertion. The offline standalone probe reported zero external requests, no overflow and no errors. Node syntax checks passed. An `$impeccable audit` scored 15/20, then 18/20 after its fixes landed: 44px contact targets in header, booking and footer; a narrow-viewport fallback for the spec table; widow control on body copy; the dead Caveat face removed. `$impeccable adapt` then closed the remaining sub-320px overflow and added the synthesised-touch suite. A `$impeccable polish` pass then removed the dead CSS and token, themed the WebKit scrollbar and autofill, added tabular numerals to the spec values, corrected the drift above, and re-measured every text/background pair from the rendered pixels (weakest 5.25:1). Visual review found balanced layouts, deliberate idle states, a clear keyboard focus ring and no clipping at 390px.
 
-Outstanding: booking destination/contact details, human listening, real-device touch and cross-browser review, publication decision. No deployment occurred.
+Contact details are on the page (816-694-6288 in header, booking and footer; hillseastrecording@gmail.com in the booking unit). Outstanding: the form's server side, human listening, real-device touch, YouTube playback on a phone, and cross-browser review. No deployment occurred from this session.
 
 ## Do's and Don'ts
 
 ### Do:
 - **Do** use The Rack's continuous rails, unit minimum heights, ears, screws, and material-specific ink when extending the page.
-- **Do** keep the four font roles distinct and preserve local self-hosted assets.
-- **Do** retain native jack buttons, keyboard-accessible slider semantics, visible focus, and the click-to-click alternative to cable dragging.
+- **Do** keep the three font roles distinct and preserve local self-hosted assets.
+- **Do** retain keyboard-accessible slider semantics, visible focus, and 44px minimum targets.
 - **Do** give each interactive control an observable consequence and distinguish simulated display data from actual audio.
-- **Do** apply the final responsive cascade: mobile unit inset, VU sizing, and hidden-rack overrides are not what the first media block alone suggests.
+- **Do** apply the final responsive cascade: mobile unit inset and VU sizing are not what the first media block alone suggests.
 - **Do** keep the hidden instrument undisclosed until the RESET gesture and stop audio/listeners when it closes.
 - **Do** label the disconnected form honestly until a real booking destination exists.
 
 ### Don't:
-- **Don't** restore the retired amp-head/tolex system, old aluminum palette, beat timings, sticky drawer navigation, rotary tabs, or knob-shaped booking CTA.
-- **Don't** claim the CSS speed control changes animated-image playback, that simulated VU motion measures studio audio, or that reduced motion stops all animation.
+- **Don't** restore the retired amp-head/tolex system, old aluminum palette, beat timings, sticky drawer navigation, rotary tabs, knob-shaped booking CTA, or the removed compressor/patchbay faceplates.
+- **Don't** claim the CSS speed control changes animated-image playback, that the VU needles measure the video's audio, or that reduced motion stops all animation.
 - **Don't** mistake declared-but-unused variables, absent ventilation/toggle hardware, or brief aspirations for shipped components.
-- **Don't** impose a red-only rule: green/amber meters, colored cables, champagne, and red form focus are established parts of this world.
+- **Don't** impose a red-only rule: amber meters, champagne, and red form focus are established parts of this world.
 - **Don't** add generic cards, pill actions, or a stock studio-photo background in place of the rack.
-- **Don't** invent studio proof, contact details, backend delivery, or successful message queuing.
+- **Don't** invent studio proof, backend delivery, or successful message queuing.
