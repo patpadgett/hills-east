@@ -80,9 +80,9 @@
   <section class="unit u4 player" id="player" aria-labelledby="player-title">
     <span class="screw tl"></span><span class="screw tr"></span><span class="screw bl"></span><span class="screw br"></span>
     <div class="player-head">
-      <span class="player-brand">Hills East</span>
-      <h2 id="player-title">Playback</h2>
-      <span class="legend">Video · stereo meter bridge</span>
+      <span class="player-brand">Hills East Recording</span>
+      <h2 id="player-title">VIDEO PLAYBACK</h2>
+      <span class="legend">stereo meter bridge</span>
     </div>
     <div class="player-face">
       <div class="player-meters">
@@ -117,6 +117,9 @@
 
   </main>
 
+  <!-- 6U rack: drum machine and synthesizer (always mounted by script.js) -->
+  <section class="unit u6 hidden-rack" id="hidden-rack" hidden aria-label="Hidden rack: drum machine and synthesizer"></section>
+
   <!-- 1U · power conditioner (reset = easter egg) -->
   <footer class="unit u1 power" aria-label="Site footer">
     <span class="screw tl"></span><span class="screw tr"></span>
@@ -130,9 +133,6 @@
       <a class="pushbtn" href="#rack">Top</a>
     </div>
   </footer>
-
-  <!-- 6U rack: drum machine and synthesizer (always mounted by script.js) -->
-  <section class="unit u6 hidden-rack" id="hidden-rack" hidden aria-label="Hidden rack: drum machine and synthesizer"></section>
 </div>
 
 <script src="vendor/gsap.min.js" defer></script>
