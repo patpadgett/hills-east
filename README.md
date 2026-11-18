@@ -127,7 +127,7 @@ Verified against a local mock endpoint: `name, email, project, need, message, ac
 
 ## Before publishing
 
-**The booking form has serverless delivery plumbing but no key set yet — nothing is sent until a form backend is configured.** John's direct details are on the page now: **816-694-6288** (header, booking unit, footer) and **hillseastrecording@gmail.com** (booking unit). Submitting a valid form says so and preserves the text; there is no storage or delivery queue, and reloading loses the draft.
+**The booking form has serverless delivery plumbing but no key set yet — nothing is sent until a form backend is configured.** John's direct details are on the page now: **913-735-9287** (header, booking unit, footer) and **hillseastrecording@gmail.com** (booking unit). Submitting a valid form says so and preserves the text; there is no storage or delivery queue, and reloading loses the draft.
 
 Listen on actual speakers before shipping: automated probes verified Web Audio signal values, not perceived sound quality. Real-device touch, YouTube playback on a phone, and non-Chromium coverage remain for final review. Parent handles final review and publication decision.
 
@@ -143,7 +143,7 @@ Sibling of ~/hills-east-recording/ (the tube-amp faceplate version); same conten
 - Playback: two YouTube channels, Play/Pause and Stop transport, a now-playing readout, a Signal jewel and the stereo VU meter bridge.
 - Stage selector: the 3-position chicken-head knob switches the How-it-works stage (drag, wheel, arrows/Home/End; role=slider with live aria-valuenow).
 - Booking: real POST-ready form on the champagne plate; the Send button is an illuminated switch. It has no server behind it — John’s phone and email sit beside it.
-- Contact: **816-694-6288** in the header, the booking unit and the footer; **hillseastrecording@gmail.com** in the booking unit. Both are `tel:` / `mailto:` links.
+- Contact: **913-735-9287** in the header, the booking unit and the footer; **hillseastrecording@gmail.com** in the booking unit. Both are `tel:` / `mailto:` links.
 - Easter egg: the RESET button on the 1U power conditioner. Press it three times within two seconds and the hidden 6U rack slides in.
 
 ## Design decisions

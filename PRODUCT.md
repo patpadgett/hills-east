@@ -18,7 +18,7 @@ Secondary: Patrick (site owner/builder), who publishes and maintains the page.
 
 ## Product Purpose
 
-A single-page website for Hills East Recording, John Matthews' recording studio in Lenexa, Kansas. Success: a visitor understands it is a real studio run by a real person, feels the room's character, and reaches John directly.
+A single-page website for Hills East Recording, John Mathews' recording studio in Lenexa, Kansas. Success: a visitor understands it is a real studio run by a real person, feels the room's character, and reaches John directly.
 
 ## Positioning
 
@@ -30,8 +30,8 @@ Recording sessions, mixing, finishing records; conversation-first booking (talk 
 
 ## Capabilities and Constraints
 
-- **Booking form**: real fields (name, email, project, need, message) with a honeypot. A serverless delivery path is built into `script.js` (`BOOK_FORM.endpoint` / `BOOK_FORM.accessKey`) but **no backend key is configured**, so nothing is sent yet. Until one is set, the form says so honestly and preserves the visitor's text.
-- **Contact details (confirmed)**: John Matthews — **816-694-6288**, shown in the header, the booking unit and the footer; **hillseastrecording@gmail.com**, shown in the booking unit. Both are `tel:` / `mailto:` links.
+- **Booking**: handled by `mailto:` links to hillseastrecording@gmail.com (no on-page form).
+- **Contact details (confirmed)**: John Mathews — **913-735-9287**, shown in the header and the footer; **hillseastrecording@gmail.com**, reached via the booking buttons. Both are `tel:` / `mailto:` links.
 - **Playback unit**: two YouTube videos by Beneath The Skin — "Internal" (`RE-oPaanCas`) and "Fade Away" (`ZrAWnT-ecWM`) — with Play/Pause and Stop transport and a stereo VU meter bridge.
 - **Playlist unit**: built and verified (local audio + live 10-band FFT), then parked outside the published tree until the MP3s arrive. See `../hills-east-playlist-unit/`.
 - **No** equipment list, rates, credits, testimonials, or client names. Do not fabricate them.
@@ -39,7 +39,7 @@ Recording sessions, mixing, finishing records; conversation-first booking (talk 
 
 ## Brand Commitments
 
-- Name: Hills East Recording (confirmed). Owner: John Matthews.
+- Name: Hills East Recording (confirmed). Owner: John Mathews.
 - The looping studio ident must anchor the top of the site (Patrick's explicit request). Current asset: `assets/hills-east-ident.mp4` (560×560) with `assets/hills-east-poster.webp`.
 - The page is a 19-inch equipment rack: continuous rails, bolted ears, brushed-black plates, a champagne booking plate, red jewel lamps, silkscreen legends. See `DESIGN.md`.
 - Patrick's conventions: action-oriented, non-self-referential CTAs; no internal/meta language in visitor-facing copy; distinctive, not template-like.

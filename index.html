@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Hills East Recording — Lenexa, Kansas</title>
-<meta name="description" content="Hills East Recording is John Matthews' one-room recording studio in Lenexa, Kansas. Tracking, mixing and finishing — you work directly with John.">
+<meta name="description" content="Hills East Recording is John Mathews' one-room recording studio in Lenexa, Kansas. Tracking, mixing and finishing — you work directly with John.">
 <meta name="theme-color" content="#0b0b0c">
 <link rel="canonical" href="https://hills-east.patpadgett.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Hills East Recording">
 <meta property="og:title" content="Hills East Recording — Lenexa, Kansas">
-<meta property="og:description" content="John Matthews' one-room recording studio in Lenexa, Kansas. Tracking, mixing and finishing — you work directly with John.">
+<meta property="og:description" content="John Mathews' one-room recording studio in Lenexa, Kansas. Tracking, mixing and finishing — you work directly with John.">
 <meta property="og:url" content="https://hills-east.patpadgett.com/">
 <meta property="og:image" content="https://hills-east.patpadgett.com/assets/hills-east-og.jpg">
 <meta property="og:image:width" content="1200">
@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="sampler.css">
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a><a class="skip" href="#book">Skip to booking</a>
+<a class="skip" href="#main">Skip to content</a>
 
 <div class="rack" id="rack">
   <div class="rail rail--l" aria-hidden="true"></div>
@@ -38,14 +38,12 @@
       <span class="jewel jewel--on" aria-hidden="true"></span>
       <a href="#rack" class="brand">Hills East Recording</a>
       <span class="legend">Lenexa · Kansas</span>
-      <a class="id-phone" href="tel:+18166946288">816-694-6288</a>
+      <a class="id-phone" href="tel:+19137359287">913-735-9287</a>
     </div>
     <div class="id-controls">
       <nav class="id-nav" aria-label="Sections">
-        <a class="pushbtn" href="#room">Room</a>
         <a class="pushbtn" href="#player">Videos</a>
-        <a class="pushbtn" href="#flow">How it works</a>
-        <a class="pushbtn pushbtn--red" href="#book">Book</a>
+        <a class="pushbtn pushbtn--red" href="mailto:hillseastrecording@gmail.com">Book</a>
       </nav>
     </div>
   </header>
@@ -70,10 +68,10 @@
 
     <div class="hero-face">
       <h1 id="hero-title">Plug in.<br> Sound like <em>you.</em></h1>
-      <p class="lede">Hills East is John Matthews’ recording studio in Lenexa, Kansas — one room, one engineer who answers his own messages. Bring the songs and tell John what they need.</p>
+      <p class="lede">Hills East is John Mathews’ recording studio in Lenexa, Kansas — one room, one engineer who answers his own messages. Bring the songs and tell John what they need.</p>
 
       <div class="hero-controls">
-        <a class="bigswitch" href="#book"><span class="bigswitch-lamp" aria-hidden="true"></span>Book a session<small>Goes straight to John</small></a>
+        <a class="bigswitch" href="mailto:hillseastrecording@gmail.com"><span class="bigswitch-lamp" aria-hidden="true"></span>Book a session<small>Goes straight to John</small></a>
       </div>
     </div>
   </section>
@@ -87,6 +85,14 @@
       <span class="legend">Video · stereo meter bridge</span>
     </div>
     <div class="player-face">
+      <div class="player-meters">
+        <div class="meters" aria-hidden="true">
+          <div class="vu" data-vu="L"><svg viewBox="0 0 200 110"><path class="vu-arc" d="M20 95 A85 85 0 0 1 180 95"/><path class="vu-red" d="M150 45 A85 85 0 0 1 180 95"/><g class="vu-ticks"></g><text x="100" y="80" class="vu-label">VU</text><line class="vu-needle" x1="100" y1="100" x2="100" y2="20"/><circle cx="100" cy="100" r="6" class="vu-hub"/></svg><span class="legend">L</span></div>
+          <div class="vu" data-vu="R"><svg viewBox="0 0 200 110"><path class="vu-arc" d="M20 95 A85 85 0 0 1 180 95"/><path class="vu-red" d="M150 45 A85 85 0 0 1 180 95"/><g class="vu-ticks"></g><text x="100" y="80" class="vu-label">VU</text><line class="vu-needle" x1="100" y1="100" x2="100" y2="20"/><circle cx="100" cy="100" r="6" class="vu-hub"/></svg><span class="legend">R</span></div>
+        </div>
+        <span class="legend">Level · playback demo</span>
+        <span class="lamp-wrap"><span class="jewel" id="player-signal" aria-hidden="true"></span><span class="legend">Signal</span></span>
+      </div>
       <figure class="player-screen">
         <div class="screen-bezel">
           <div class="screen" id="screen">
@@ -100,93 +106,15 @@
           </div>
           <span class="screen-glass" aria-hidden="true"></span>
         </div>
-        <figcaption class="crt-cap screen-cap">
-          <span class="legend">Now playing · <span id="now-source">no source</span></span>
-          <span class="player-transport">
-            <button class="pushbtn pushbtn--sm" type="button" id="player-play" aria-pressed="false" disabled>Play</button>
-            <button class="pushbtn pushbtn--sm" type="button" id="player-stop" disabled>Stop</button>
-          </span>
-        </figcaption>
       </figure>
-      <div class="player-meters">
-        <div class="meters" aria-hidden="true">
-          <div class="vu" data-vu="L"><svg viewBox="0 0 200 110"><path class="vu-arc" d="M20 95 A85 85 0 0 1 180 95"/><path class="vu-red" d="M150 45 A85 85 0 0 1 180 95"/><g class="vu-ticks"></g><text x="100" y="80" class="vu-label">VU</text><line class="vu-needle" x1="100" y1="100" x2="100" y2="20"/><circle cx="100" cy="100" r="6" class="vu-hub"/></svg><span class="legend">L</span></div>
-          <div class="vu" data-vu="R"><svg viewBox="0 0 200 110"><path class="vu-arc" d="M20 95 A85 85 0 0 1 180 95"/><path class="vu-red" d="M150 45 A85 85 0 0 1 180 95"/><g class="vu-ticks"></g><text x="100" y="80" class="vu-label">VU</text><line class="vu-needle" x1="100" y1="100" x2="100" y2="20"/><circle cx="100" cy="100" r="6" class="vu-hub"/></svg><span class="legend">R</span></div>
-        </div>
-        <span class="legend">Level · playback demo</span>
-        <span class="lamp-wrap"><span class="jewel" id="player-signal" aria-hidden="true"></span><span class="legend">Signal</span></span>
-      </div>
     </div>
     <div class="player-sources">
       <span class="legend">Source</span>
-      <button class="pushbtn source" type="button" data-video="RE-oPaanCas" data-title="Internal — Beneath The Skin" aria-pressed="false">CH 1 · Internal</button>
-      <button class="pushbtn source" type="button" data-video="ZrAWnT-ecWM" data-title="Fade Away — Beneath The Skin" aria-pressed="false">CH 2 · Fade Away</button>
+      <button class="pushbtn source" type="button" data-video="RE-oPaanCas" data-title="Internal — Beneath The Skin" aria-pressed="false">Beneath The Skin - Internal</button>
+      <button class="pushbtn source" type="button" data-video="ZrAWnT-ecWM" data-title="Fade Away — Beneath The Skin" aria-pressed="false">Beneath The Skin - Fade Away</button>
       <p class="player-status" id="player-status" role="status"></p>
     </div>
     <noscript><p class="demo-note">Playback needs JavaScript. Watch on YouTube: <a href="https://www.youtube.com/watch?v=RE-oPaanCas">“Internal”</a> and <a href="https://www.youtube.com/watch?v=ZrAWnT-ecWM">“Fade Away”</a>.</p></noscript>
-  </section>
-
-  <!-- 3U · the room -->
-  <section class="unit u3 room" id="room" aria-labelledby="room-title">
-    <span class="screw tl"></span><span class="screw tr"></span><span class="screw bl"></span><span class="screw br"></span>
-    <div class="room-face">
-      <h2 id="room-title">One room.<br>One set of ears.</h2>
-      <p>Hills East is a small studio, on purpose. You work directly with John from the first message to the last file — no front desk, no hand-offs, nobody in the room who doesn’t need to be there.</p>
-      <p>Whatever you play and wherever the record stands, tell John what it needs to become and he’ll tell you honestly what the room can do for it.</p>
-    </div>
-    <dl class="spec">
-      <div><dt>Studio</dt><dd>Hills East Recording</dd></div>
-      <div><dt>Engineer</dt><dd>John Matthews</dd></div>
-      <div><dt>Location</dt><dd>Lenexa, Kansas</dd></div>
-      <div><dt>Contact</dt><dd>Direct with John</dd></div>
-    </dl>
-    <div class="ladder" aria-hidden="true"><span class="legend">Demo level</span><div class="ladder-leds"></div></div>
-  </section>
-
-  <!-- 2U · how it works: rotary selector -->
-  <section class="unit u2 flow" id="flow" aria-labelledby="flow-title">
-    <span class="screw tl"></span><span class="screw tr"></span><span class="screw bl"></span><span class="screw br"></span>
-    <h2 id="flow-title">How a session comes together.</h2>
-    <div class="selector">
-      <div class="knob knob--chicken knob--big" role="slider" tabindex="0" aria-label="Session stage" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0" aria-valuetext="Talk" data-knob="stage" data-steps="3"><span class="knob-cap"><i class="knob-line"></i></span></div>
-      <ol class="stage-labels" aria-hidden="true"><li>Talk</li><li>Track</li><li>Finish</li></ol>
-    </div>
-    <div class="stages">
-      <article class="stage is-on" data-stage="0"><h3>Talk it through</h3><p>Send John the songs, rough demos, or a voice memo, plus a couple of records you want yours to sit next to. He’ll come back with a plan, a rough timeline, and straight answers.</p></article>
-      <article class="stage" data-stage="1"><h3>Get in the room</h3><p>Load in, get comfortable, dial the sounds at the source. The session runs at the pace of the performance — nobody watches the clock louder than the music.</p></article>
-      <article class="stage" data-stage="2"><h3>Finish and release</h3><p>Mixes go back and forth until they feel right. Then finals, formats, and a clear list of what you’re walking away with — ready for release.</p></article>
-    </div>
-  </section>
-
-  <!-- 4U · booking -->
-  <section class="unit u4 booking" id="book" aria-labelledby="book-title">
-    <span class="screw tl"></span><span class="screw tr"></span><span class="screw bl"></span><span class="screw br"></span>
-    <div class="book-face">
-      <h2 id="book-title">Book a session.</h2>
-      <p>This goes straight to John. Tell him what you’re making and where it stands; he’ll come back with a plan and straight answers.</p>
-      <ul class="book-facts">
-        <li><span class="jewel jewel--on jewel--sm" aria-hidden="true"></span>One room, one engineer</li>
-        <li><span class="jewel jewel--on jewel--sm" aria-hidden="true"></span>Replies come from John</li>
-        <li><span class="jewel jewel--on jewel--sm" aria-hidden="true"></span>Lenexa, Kansas</li>
-      </ul>
-      <ul class="book-contact">
-        <li><span class="jewel jewel--on jewel--sm" aria-hidden="true"></span><a href="tel:+18166946288">816-694-6288</a></li>
-        <li><span class="jewel jewel--on jewel--sm" aria-hidden="true"></span><a href="mailto:hillseastrecording@gmail.com">hillseastrecording@gmail.com</a></li>
-      </ul>
-    </div>
-    <form class="book-form" action="#" method="post" novalidate>
-      <div class="hp-wrap" aria-hidden="true"><input type="text" name="botcheck" class="hp" tabindex="-1" autocomplete="off"><input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off"></div>
-      <div class="f"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required></div>
-      <div class="f"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
-      <div class="f"><label for="project">Project or band</label><input id="project" name="project"></div>
-      <div class="f"><label for="need">What do you need?</label>
-        <select id="need" name="need"><option>Tracking</option><option>Mixing</option><option>Finishing</option><option>The whole record</option><option>Not sure yet</option></select></div>
-      <div class="f f--wide"><label for="msg">Tell John about it</label><textarea id="msg" name="message" rows="5" required></textarea></div>
-      <div class="f f--wide send-row">
-        <button class="bigswitch bigswitch--btn" type="submit"><span class="bigswitch-lamp" aria-hidden="true"></span>Send to John<small>He replies directly</small></button>
-        <p class="form-note" id="form-note">This form has no server behind it, so nothing is sent — call or email John directly and he’ll reply.</p>
-      </div>
-    </form>
   </section>
 
   </main>
@@ -198,14 +126,14 @@
       <span class="legend">Power conditioner</span>
       <span class="ladder-leds ladder-leds--power" aria-hidden="true"></span>
     </div>
-    <p class="power-copy">© <span data-year>2026</span> Hills East Recording. Lenexa, Kansas<br><a href="tel:+18166946288">816-694-6288</a></p>
+    <p class="power-copy">© <span data-year>2026</span> Hills East Recording. Lenexa, Kansas<br><a href="tel:+19137359287">913-735-9287</a></p>
     <div class="power-right">
       <button class="reset" id="reset" type="button" aria-label="Reset"><span class="legend">Reset</span></button>
       <a class="pushbtn" href="#rack">Top</a>
     </div>
   </footer>
 
-  <!-- hidden 6U rack, mounted by the easter egg -->
+  <!-- 6U rack: drum machine and synthesizer (always mounted by script.js) -->
   <section class="unit u6 hidden-rack" id="hidden-rack" hidden aria-label="Hidden rack: drum machine and synthesizer"></section>
 </div>
 

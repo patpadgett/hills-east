@@ -57,7 +57,7 @@
      transport state with a simulated programme level — a visual demo, not a meter of
      the video's audio. */
   const playerEl=$('#player'), screenHolder=$('#screen-holder'), screenFrame=$('#screen-frame'), screenIdle=$('#screen-idle');
-  const nowSource=$('#now-source'), statusEl=$('#player-status'), playBtn=$('#player-play'), stopBtn=$('#player-stop'), signal=$('#player-signal');
+  const statusEl=$('#player-status'), signal=$('#player-signal');
   const sourceBtns=$$('.source');
   const titles=new Map(sourceBtns.map(b=>[b.dataset.video,b.dataset.title]));
   const needles=$$('.vu-needle');
@@ -101,12 +101,7 @@
   function showScreen(){ screenIdle.hidden=true; screenFrame.hidden=false; }
   function syncTransport(){
     const playing=yt.status==='playing';
-    playBtn.setAttribute('aria-pressed',String(playing));
-    playBtn.textContent=playing?'Pause':'Play';
-    playBtn.disabled=!yt.video;
-    stopBtn.disabled=!yt.video;
     signal.classList.toggle('jewel--on',playing);
-    nowSource.textContent=yt.video?(titles.get(yt.video)||yt.video):'no source';
   }
   function onState(e){
     const s=e.data;
@@ -152,19 +147,6 @@
     }catch(err){ yt.status='error'; setStatus('Playback failed to start.'); syncTransport(); }
     syncTransport();
   }
-  playBtn.addEventListener('click',()=>{
-    if(!yt.video)return;
-    if(yt.status==='playing'){ yt.player?.pauseVideo(); return; }
-    if(yt.player&&(yt.status==='paused'||yt.status==='cued'))yt.player.playVideo();
-    else playVideo(yt.video);
-  });
-  stopBtn.addEventListener('click',()=>{
-    if(!yt.video)return;
-    yt.stopping=true;
-    yt.player?.stopVideo();
-    yt.status='idle';
-    showIdle();syncTransport();syncMeter();
-  });
   sourceBtns.forEach(b=>b.addEventListener('click',()=>playVideo(b.dataset.video)));
   new IntersectionObserver(entries=>{playerVisible=entries[0].isIntersecting;syncMeter();}).observe(playerEl);
   syncTransport();paintMeters();
@@ -209,35 +191,6 @@
   reduced.addEventListener('change',()=>{if(reducedOn())identWanted=false;syncMotion();});
   document.addEventListener('visibilitychange',()=>{syncMeter();syncIdent();});
 
-  const form=$('.book-form');
-  /* Booking delivery. GitHub Pages is static, so the form posts to a serverless
-     form backend that emails John. Fill endpoint + accessKey to switch it on;
-     until then the honest "nothing is sent" note stays and nothing leaves the page.
-     Web3Forms: endpoint https://api.web3forms.com/submit, accessKey from web3forms.com.
-     Formspree:  endpoint https://formspree.io/f/<your-form-id>, accessKey '' (id is in the URL). */
-  const BOOK_FORM = { endpoint:'', accessKey:'' };
-  const bookNote = $('#form-note');
-  const bookIdle = 'This form has no server behind it, so nothing is sent — call or email John directly and he’ll reply.';
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    if(!form.reportValidity())return;
-    if(!BOOK_FORM.endpoint){ bookNote.textContent=bookIdle; bookNote.setAttribute('role','status'); return; }
-    // Honeypot: both fields must stay empty. Bots fill them, people never see them.
-    if([...form.querySelectorAll('.hp')].some(i=>i.value.trim())){ bookNote.textContent=bookIdle; return; }
-    const data=new FormData(form);
-    if(BOOK_FORM.accessKey)data.set('access_key',BOOK_FORM.accessKey);
-    data.set('_subject',`Booking enquiry from ${$('#name').value||'the site'}`);
-    data.set('_replyto',$('#email').value);
-    bookNote.textContent='Sending…';bookNote.setAttribute('role','status');
-    try{
-      const res=await fetch(BOOK_FORM.endpoint,{method:'POST',body:data,headers:{'Accept':'application/json'}});
-      if(!res.ok)throw new Error(res.status);
-      bookNote.textContent='Sent — John will reply directly. If you don’t hear back, call 816-694-6288.';
-      form.reset();
-    }catch(err){
-      bookNote.textContent='That didn’t send. Call or email John directly — 816-694-6288 · hillseastrecording@gmail.com.';
-    }
-  });
   const hidden=$('#hidden-rack');let presses=[];
   $('#reset').addEventListener('click',()=>{
     const now=performance.now();presses=presses.filter(t=>now-t<2000).concat(now);

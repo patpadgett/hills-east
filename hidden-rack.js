@@ -401,4 +401,14 @@
     return window.HiddenRack;
   }
   window.HiddenRack = { mount, unmount, getLevels };
+  // The rack is always on the page now; mount it without waiting for a gesture.
+  (function autoMount() {
+    const el = document.getElementById('hidden-rack');
+    if (el) {
+      el.hidden = false;
+      if (!el.childElementCount) {
+        try { window.HiddenRack.mount(el); } catch (_) {}
+      }
+    }
+  })();
 })();
