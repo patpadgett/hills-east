@@ -552,8 +552,6 @@ html:not(.has-js) .stages { display:grid; gap:1.5rem; }
           <div class="vu" data-vu="L"><svg viewBox="0 0 200 110"><path class="vu-arc" d="M20 95 A85 85 0 0 1 180 95"/><path class="vu-red" d="M150 45 A85 85 0 0 1 180 95"/><g class="vu-ticks"></g><text x="100" y="80" class="vu-label">VU</text><line class="vu-needle" x1="100" y1="100" x2="100" y2="20"/><circle cx="100" cy="100" r="6" class="vu-hub"/></svg><span class="legend">L</span></div>
           <div class="vu" data-vu="R"><svg viewBox="0 0 200 110"><path class="vu-arc" d="M20 95 A85 85 0 0 1 180 95"/><path class="vu-red" d="M150 45 A85 85 0 0 1 180 95"/><g class="vu-ticks"></g><text x="100" y="80" class="vu-label">VU</text><line class="vu-needle" x1="100" y1="100" x2="100" y2="20"/><circle cx="100" cy="100" r="6" class="vu-hub"/></svg><span class="legend">R</span></div>
         </div>
-        <span class="legend">Level · playback demo</span>
-        <span class="lamp-wrap"><span class="jewel" id="player-signal" aria-hidden="true"></span><span class="legend">Signal</span></span>
       </div>
       <figure class="player-screen">
         <div class="screen-bezel">
@@ -688,7 +686,7 @@ html:not(.has-js) .stages { display:grid; gap:1.5rem; }
      transport state with a simulated programme level — a visual demo, not a meter of
      the video's audio. */
   const playerEl=$('#player'), screenHolder=$('#screen-holder'), screenFrame=$('#screen-frame'), screenIdle=$('#screen-idle');
-  const statusEl=$('#player-status'), signal=$('#player-signal');
+  const statusEl=$('#player-status');
   const sourceBtns=$$('.source');
   const titles=new Map(sourceBtns.map(b=>[b.dataset.video,b.dataset.title]));
   const needles=$$('.vu-needle');
@@ -731,8 +729,7 @@ html:not(.has-js) .stages { display:grid; gap:1.5rem; }
   function showIdle(){ screenIdle.hidden=false; screenFrame.hidden=true; }
   function showScreen(){ screenIdle.hidden=true; screenFrame.hidden=false; }
   function syncTransport(){
-    const playing=yt.status==='playing';
-    signal.classList.toggle('jewel--on',playing);
+    // transport UI removed; playback state is reflected by the YouTube iframe itself
   }
   function onState(e){
     const s=e.data;
@@ -825,7 +822,7 @@ html:not(.has-js) .stages { display:grid; gap:1.5rem; }
   const hidden=$('#hidden-rack');let presses=[];
   $('#reset').addEventListener('click',()=>{
     const now=performance.now();presses=presses.filter(t=>now-t<2000).concat(now);
-    if(presses.length>=3){presses=[];if(!hidden.hidden)return;hidden.hidden=false;hidden.classList.add('is-in');window.HiddenRack?.mount(hidden);hidden.scrollIntoView({behavior:motionAllowed()?'smooth':'instant',block:'start'});window.ScrollTrigger?.refresh();}
+    if(presses.length>=3){presses=[];hidden.hidden=false;hidden.classList.add('is-in');if(!hidden.childElementCount)window.HiddenRack?.mount(hidden);hidden.scrollIntoView({behavior:motionAllowed()?'smooth':'instant',block:'start'});window.ScrollTrigger?.refresh();}
   });
   new MutationObserver(()=>{if(!hidden.hidden&&!hidden.childElementCount){hidden.hidden=true;hidden.classList.remove('is-in');window.ScrollTrigger?.refresh();}}).observe(hidden,{childList:true});
   syncMotion({deferIdent:true});

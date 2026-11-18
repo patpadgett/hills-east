@@ -57,7 +57,7 @@
      transport state with a simulated programme level — a visual demo, not a meter of
      the video's audio. */
   const playerEl=$('#player'), screenHolder=$('#screen-holder'), screenFrame=$('#screen-frame'), screenIdle=$('#screen-idle');
-  const statusEl=$('#player-status'), signal=$('#player-signal');
+  const statusEl=$('#player-status');
   const sourceBtns=$$('.source');
   const titles=new Map(sourceBtns.map(b=>[b.dataset.video,b.dataset.title]));
   const needles=$$('.vu-needle');
@@ -100,8 +100,7 @@
   function showIdle(){ screenIdle.hidden=false; screenFrame.hidden=true; }
   function showScreen(){ screenIdle.hidden=true; screenFrame.hidden=false; }
   function syncTransport(){
-    const playing=yt.status==='playing';
-    signal.classList.toggle('jewel--on',playing);
+    // transport UI removed; playback state is reflected by the YouTube iframe itself
   }
   function onState(e){
     const s=e.data;
@@ -194,7 +193,7 @@
   const hidden=$('#hidden-rack');let presses=[];
   $('#reset').addEventListener('click',()=>{
     const now=performance.now();presses=presses.filter(t=>now-t<2000).concat(now);
-    if(presses.length>=3){presses=[];if(!hidden.hidden)return;hidden.hidden=false;hidden.classList.add('is-in');window.HiddenRack?.mount(hidden);hidden.scrollIntoView({behavior:motionAllowed()?'smooth':'instant',block:'start'});window.ScrollTrigger?.refresh();}
+    if(presses.length>=3){presses=[];hidden.hidden=false;hidden.classList.add('is-in');if(!hidden.childElementCount)window.HiddenRack?.mount(hidden);hidden.scrollIntoView({behavior:motionAllowed()?'smooth':'instant',block:'start'});window.ScrollTrigger?.refresh();}
   });
   new MutationObserver(()=>{if(!hidden.hidden&&!hidden.childElementCount){hidden.hidden=true;hidden.classList.remove('is-in');window.ScrollTrigger?.refresh();}}).observe(hidden,{childList:true});
   syncMotion({deferIdent:true});
